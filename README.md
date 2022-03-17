@@ -1,6 +1,6 @@
 # Proyecto2BdD
 
-
+Nota: De momento no se crearon todas las tablas porque el dise;o se cambio a ultima hora en la revision
 
 
 ## Diagrama Entidad Relacion
