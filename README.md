@@ -4,4 +4,5 @@
 
 
 ## Diagrama Entidad Relacion
-![imagen](https://user-images.githubusercontent.com/64183934/158499208-6457ee12-b4d1-4011-9c08-5c514ac510b4.png)
+![imagen](https://user-images.githubusercontent.com/64183934/158736997-ec37c5af-7199-4e0d-b7f7-4f3b6e9ebe12.png)
+
