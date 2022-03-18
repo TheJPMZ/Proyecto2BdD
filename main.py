@@ -1,7 +1,7 @@
 
 
 def main():
-    import build.gui
+    import build.Login.gui
 
 if __name__ == "__main__":
     main()
