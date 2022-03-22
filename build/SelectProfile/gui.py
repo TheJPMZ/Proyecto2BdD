@@ -15,6 +15,8 @@ import webbrowser
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 
+# ! The buttons need to be remade for more profiles
+
 lista = []
 
 def move(destiny,window, canvas):
