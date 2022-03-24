@@ -10,7 +10,7 @@ import psycopg2
 def check_user(user):
     try:
         connection = psycopg2.connect(user="postgres",
-                                    password="C1Molina!",
+                                    password="psswrd",
                                     host="localhost",
                                     port="5432",
                                     database="Proyecto02")
@@ -36,7 +36,7 @@ def check_user(user):
 def check_pass(psswrd):
     try:
         connection = psycopg2.connect(user="postgres",
-                                    password="C1Molina!",
+                                    password="psswrd",
                                     host="localhost",
                                     port="5432",
                                     database="Proyecto02")
