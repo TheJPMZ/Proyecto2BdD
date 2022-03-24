@@ -1,7 +1,9 @@
 
-
+from hash import hash
 from operator import pos
 import psycopg2
+
+
 
 
 def conexion():
@@ -43,7 +45,7 @@ def check_pass(user,psswrd):
             cursor.execute(postgres_select_query % user)
             total = cursor.fetchall()
             password = total[0][0]
-            if psswrd == password:
+            if hash(psswrd) == password:
                 return True
             else: return False
     except (Exception, psycopg2.Error) as error:
@@ -58,7 +60,7 @@ def check_pass(user,psswrd):
 
 
 
-user = 'jpmz'
 
 
-print(check_pass(user,'fdjaodfjoad'))
+print(check_pass('cayomol','mememememe'))
+#print(check_pass(user,'fdjaodfjoad'))
