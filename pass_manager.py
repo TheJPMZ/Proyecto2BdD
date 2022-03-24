@@ -4,16 +4,18 @@ from operator import pos
 import psycopg2
 
 
-
+def conexion():
+    connection = psycopg2.connect(user="postgres",
+                                    password="clave",
+                                    host="localhost",
+                                    port="5432",
+                                    database="Proyecto02")
+    return connection
 
 
 def check_user(user):
     try:
-        connection = psycopg2.connect(user="postgres",
-                                    password="psswrd",
-                                    host="localhost",
-                                    port="5432",
-                                    database="Proyecto02")
+        connection = conexion()
         cursor = connection.cursor()
         postgres_select_query = """ SELECT username FROM usuario WHERE username = '%s'"""
         cursor.execute(postgres_select_query % user)
@@ -30,25 +32,20 @@ def check_user(user):
         if connection:
             cursor.close()
             connection.close()
-            print("PostgreSQL connection is closed")
 
 
-def check_pass(psswrd):
+def check_pass(user,psswrd):
     try:
-        connection = psycopg2.connect(user="postgres",
-                                    password="psswrd",
-                                    host="localhost",
-                                    port="5432",
-                                    database="Proyecto02")
+        connection = conexion()
         cursor = connection.cursor()
-        postgres_select_query = """ SELECT password FROM usuario WHERE password = '%s'"""
-        cursor.execute(postgres_select_query % psswrd)
-        total = cursor.fetchall()
-        print(total)
-        if len(total)>0:    
-            return True
-        else: 
-            return False
+        if (check_user(user)):
+            postgres_select_query = """ SELECT password FROM usuario WHERE username = '%s'"""
+            cursor.execute(postgres_select_query % user)
+            total = cursor.fetchall()
+            password = total[0][0]
+            if psswrd == password:
+                return True
+            else: return False
     except (Exception, psycopg2.Error) as error:
         print("Failed to insert record into mobile table", error)
 
@@ -61,7 +58,7 @@ def check_pass(psswrd):
 
 
 
-user = "jmpz"
+user = 'jpmz'
 
 
-print(check_pass("pepepepepep"))
+print(check_pass(user,'fdjaodfjoad'))
