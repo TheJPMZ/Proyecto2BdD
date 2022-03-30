@@ -5,30 +5,31 @@ from SelectProfile import gui as SProfile
 from CreateProfile import gui as CProfile
 
 
+def createWindow():
 
-window = Tk()
+    window = Tk()
 
-window.geometry("360x640")
-window.configure(bg = "#050840")
+    window.geometry("360x640")
+    window.configure(bg = "#050840")
 
-canvas = Canvas(
-    window,
-    bg = "#050840",
-    height = 640,
-    width = 360,
-    bd = 0,
-    highlightthickness = 0,
-    relief = "ridge"
-)
+    canvas = Canvas(
+        window,
+        bg = "#050840",
+        height = 640,
+        width = 360,
+        bd = 0,
+        highlightthickness = 0,
+        relief = "ridge"
+    )
 
-canvas.place(x = 0, y = 0)
+    canvas.place(x = 0, y = 0)
 
+    return window, canvas
 
-Login.run_window(window,canvas)
-
-
-
-window.mainloop()
+def main():
+    window, canvas = createWindow()
+    Login.run_window(window,canvas)
+    window.mainloop()
 
 
 

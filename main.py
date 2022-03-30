@@ -1,7 +1,7 @@
-
+import build.gui_controller
 
 def main():
-    import build.gui_controller
+    build.gui_controller.main()
 
 if __name__ == "__main__":
     main()
