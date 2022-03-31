@@ -8,12 +8,20 @@ from SelectProfile import gui as SProfile
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+import pass_manager as manager
+
+def some_callback(entry):
+    entry.config(fg="black")# note that you must include the event as an arg, even if you don't use it.
+    entry.delete(0, "end")
+    return None
+
 
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 
 lista = []
+
 
 def move(destiny,window, canvas):
     for x in lista:
@@ -35,7 +43,7 @@ def run_window(window,canvas):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: move(Sign,window, canvas),
+        command= lambda: move(SProfile,window, canvas),
         relief="flat"
     )
     button_1.place(
@@ -53,7 +61,7 @@ def run_window(window,canvas):
         image = button_image_2,
         borderwidth = 0,
         highlightthickness = 0,
-        command = lambda: move(SProfile,window, canvas),
+        command = lambda: Get((entry_1,entry_2)),
         relief = "flat"
     )
     button_2.place(
@@ -82,6 +90,7 @@ def run_window(window,canvas):
     entry_1 = Entry(
         bd=0,
         bg="#F2F2F2",
+        fg = "grey",
         highlightthickness=0
     )
     entry_1.place(
@@ -90,6 +99,10 @@ def run_window(window,canvas):
         width=262.0,
         height=32.0
     )
+    entry_1.insert(0, "Username")
+
+    entry_1.bind("<Button-1>", lambda x: some_callback(entry_1))
+
     lista.append(entry_1)
 
     image_image_2 = PhotoImage(
@@ -110,6 +123,7 @@ def run_window(window,canvas):
     entry_2 = Entry(
         bd=0,
         bg="#F2F2F2",
+        fg = "grey",
         highlightthickness=0
     )
     entry_2.place(
@@ -118,6 +132,10 @@ def run_window(window,canvas):
         width=262.0,
         height=32.0
     )
+    entry_2.insert(0, "Password")
+    
+    entry_2.bind("<Button-1>", lambda x: some_callback(entry_2))
+    
     lista.append(entry_2)
 
     canvas.create_text(
@@ -154,7 +172,19 @@ def run_window(window,canvas):
         fill="#414059",
         font=("Roboto", 24 * -1)
     )
+    
+    def Get(entry):
+        e1 = entry[0].get()
+        e2 = entry[1].get()
+        if manager.check_pass(e1,e2):
+            print("Permiso concebido")
+            move(SProfile,window, canvas)
+        else:
+            print("Incorrecto")
+        
     window.resizable(False, False)
 
     window.mainloop()
+    
+
 
