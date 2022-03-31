@@ -8,11 +8,12 @@ import psycopg2
 
 def conexion():
     connection = psycopg2.connect(user="postgres",
-                                    password="clave",
+                                    password="C1Molina!",
                                     host="localhost",
                                     port="5432",
                                     database="Proyecto02")
     return connection
+
 
 
 def check_user(user):
@@ -27,7 +28,7 @@ def check_user(user):
         else: return False
 
     except (Exception, psycopg2.Error) as error:
-        print("Failed to insert record into mobile table", error)
+        print("Failed to connect to the database", error)
 
     finally:
         # closing database connection.
@@ -45,22 +46,15 @@ def check_pass(user,psswrd):
             cursor.execute(postgres_select_query % user)
             total = cursor.fetchall()
             password = total[0][0]
-            if hash(psswrd) == password:
+            if psswrd == password:
                 return True
             else: return False
     except (Exception, psycopg2.Error) as error:
-        print("Failed to insert record into mobile table", error)
-
-    finally:
-        # closing database connection.
-        if connection:
-            cursor.close()
-            connection.close()
-            print("PostgreSQL connection is closed")
+        print("Failed to connect to the database", error)
 
 
 
 
 
-print(check_pass('cayomol','mememememe'))
+
 #print(check_pass(user,'fdjaodfjoad'))
