@@ -3,9 +3,6 @@ from hash import hash
 from operator import pos
 import psycopg2
 
-
-
-
 def conexion():
     connection = psycopg2.connect(user="postgres",
                                     password="Clave",
