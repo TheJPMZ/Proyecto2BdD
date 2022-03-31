@@ -16,12 +16,12 @@ def some_callback(entry):
     return None
 
 
+
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 
 lista = []
 
-get_lista = []
 
 def move(destiny,window, canvas):
     for x in lista:
@@ -180,7 +180,7 @@ def run_window(window,canvas):
             print("Permiso concebido")
             move(SProfile,window, canvas)
         else:
-            print("muerete sabandija")
+            print("Incorrecto")
         
     window.resizable(False, False)
 
