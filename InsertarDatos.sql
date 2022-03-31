@@ -29,3 +29,9 @@ INSERT INTO ver(
 	cusuario, cpelicula, duracion, fecha, hora)
 	VALUES 	('U1', 'P1', '115', '2022-03-16', '16:02'),
 			('U2','P1','45','2022-03-16', '16:02');
+
+INSERT INTO perfiles(
+	cusuario, profilename, edad, Lognumber)
+	VALUES 	('U1', 'perfil1', '20', '1'),
+			('U2', 'perfil2', '32', '1');
+)

@@ -53,3 +53,13 @@ CREATE TABLE ver
     PRIMARY KEY (cusuario, cpelicula, fecha, hora)
 )
 
+CREATE TABLE perfiles
+(
+	cusuario  	VARCHAR(10) 			NOT NULL,
+	profilename	VARCHAR(10) 			NOT NULL,
+	edad	  	numeric					NOT NULL,
+	Lognumber	numeric					NOT NULL,
+	CONSTRAINT	fk_vcusuario	FOREIGN KEY	(cusuario)	REFERENCES	usuario(codigo),
+	PRIMARY KEY (cusuario, profilename)
+)
+
