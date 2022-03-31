@@ -2,6 +2,8 @@
 
 Nota: De momento no se crearon todas las tablas porque el dise;o se cambio a ultima hora en la revision
 
+## Todo list
+
 - [ ] Sign in y Log in
 - [ ] Busqueda (base en los actores estrellas, director, categoría de entretenimiento, género(s), premios ganados, fecha de estreno, o el nombre específico del contenido, y cualquier parámetro adicional que se considere conveniente a criterio del desarrollador)
 - [ ] Reproduccion de videos
