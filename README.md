@@ -19,7 +19,7 @@ Nota: De momento no se crearon todas las tablas porque el dise;o se cambio a ult
 - - [ ] Editar y Borrar cuentas
 - - [ ] Agregar, modificar o eliminar anunciantes y su contenido a promocionar.
 - [ ] Seguridad
-- - [ ] Hashear
+- - [x] Hashear
 - - [ ] Validar entradas
 - - [ ] Registro de intentos fallidos
 
