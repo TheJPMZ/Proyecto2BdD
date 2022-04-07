@@ -4,6 +4,7 @@
 
 
 from pathlib import Path
+import time
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
@@ -159,13 +160,19 @@ def run_window(window, canvas, profile):
         height=229.0
     )
 
+    def open_url(url):
+        webbrowser.open(url)
+        time.sleep(10)
+        webbrowser.open("https://shattereddisk.github.io/rickroll/rickroll.mp4")
+        print("done")
+
     button_image_7 = PhotoImage(
         file=relative_to_assets("button_7.png"))
     button_7 = Button(
         image=button_image_7,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: webbrowser.open_new("https://shattereddisk.github.io/rickroll/rickroll.mp4"),
+        command=lambda: open_url("https://www.youtube.com/watch?v=kJ2KS6s-Pck"),
         relief="flat"
     )
     button_7.place(
