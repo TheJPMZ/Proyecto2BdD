@@ -11,6 +11,7 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 from Login         import gui as Login
 from SelectProfile import gui as SProfile
 import webbrowser
+import registro as reg
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
@@ -284,5 +285,16 @@ def run_window(window, canvas):
         fill="#050840",
         font=("Roboto", 24 * -1)
     )
+    
+    
+    def Registrarse():
+        e1 = entry[0].get()
+        e2 = entry[1].get()
+        if manager.check_pass(e1,e2):
+            print("Permiso concebido")
+            move(SProfile,window, canvas)
+        else:
+            print("Incorrecto")
+        
     window.resizable(False, False)
     window.mainloop()
