@@ -8,7 +8,7 @@ from CreateProfile import gui as CProfile
 from Movies        import gui as Movies
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path("./assets")
+ASSETS_PATH = OUTPUT_PATH / Path("../assets")
 
 profiles = [('U1','perfil1',20,1),('U1','perfil2',20,2)]
 
@@ -35,7 +35,7 @@ def run_window(window, canvas):
     canvas.delete("all")
 
     button_image_1 = PhotoImage(
-        file=relative_to_assets("button_1.png"))
+        file=relative_to_assets("return_button.png"))
     button_1 = Button(
         image=button_image_1,
         borderwidth=0,
@@ -51,7 +51,7 @@ def run_window(window, canvas):
     )
 
     button_image_2 = PhotoImage(    
-        file=relative_to_assets("button_2.png"))
+        file=relative_to_assets("add_profile_button.png"))
     button_2 = Button(
         image=button_image_2,
         borderwidth=0,

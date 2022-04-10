@@ -8,5 +8,7 @@ def hash(password):
     hasher = d.digest()
     # Crear un hash que pueda ser leido por algun humano
     hasher = d.hexdigest()
-    
+    print(hasher)
+
+
     return hasher

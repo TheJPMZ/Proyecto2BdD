@@ -13,7 +13,7 @@ from SelectProfile import gui as SProfile
 import webbrowser
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path("./assets")
+ASSETS_PATH = OUTPUT_PATH / Path("../assets")
 
 
 lista = []
@@ -32,7 +32,7 @@ def run_window(window, canvas):
     canvas.delete("all")
 
     button_image_1 = PhotoImage(
-        file=relative_to_assets("button_1.png"))
+        file=relative_to_assets("mini_return_button.png"))
     button_1 = Button(
         image=button_image_1,
         borderwidth=0,
@@ -49,7 +49,7 @@ def run_window(window, canvas):
     lista.append(button_1)
 
     button_image_2 = PhotoImage(
-        file=relative_to_assets("button_2.png"))
+        file=relative_to_assets("mini_signup_button.png"))
     button_2 = Button(
         image=button_image_2,
         borderwidth=0,
@@ -67,7 +67,7 @@ def run_window(window, canvas):
     
 
     image_image_1 = PhotoImage(
-        file=relative_to_assets("image_1.png"))
+        file=relative_to_assets("text_area.png"))
     image_1 = canvas.create_image(
         180.0,
         285.0,
@@ -75,7 +75,7 @@ def run_window(window, canvas):
     )
 
     entry_image_1 = PhotoImage(
-        file=relative_to_assets("entry_1.png"))
+        file=relative_to_assets("text_entry.png"))
     entry_bg_1 = canvas.create_image(
         180.0,
         286.0,
@@ -104,7 +104,7 @@ def run_window(window, canvas):
     )
 
     image_image_2 = PhotoImage(
-        file=relative_to_assets("image_2.png"))
+        file=relative_to_assets("text_area.png"))
     image_2 = canvas.create_image(
         180.0,
         210.0,
@@ -112,7 +112,7 @@ def run_window(window, canvas):
     )
 
     entry_image_2 = PhotoImage(
-        file=relative_to_assets("entry_2.png"))
+        file=relative_to_assets("text_entry.png"))
     entry_bg_2 = canvas.create_image(
         180.0,
         211.0,
@@ -132,7 +132,7 @@ def run_window(window, canvas):
     lista.append(entry_2)
 
     image_image_3 = PhotoImage(
-        file=relative_to_assets("image_3.png"))
+        file=relative_to_assets("text_area.png"))
     image_3 = canvas.create_image(
         180.0,
         360.0,
@@ -140,7 +140,7 @@ def run_window(window, canvas):
     )
 
     entry_image_3 = PhotoImage(
-        file=relative_to_assets("entry_3.png"))
+        file=relative_to_assets("text_entry.png"))
     entry_bg_3 = canvas.create_image(
         180.0,
         361.0,
@@ -160,7 +160,7 @@ def run_window(window, canvas):
     lista.append(entry_3)
 
     image_image_4 = PhotoImage(
-        file=relative_to_assets("image_4.png"))
+        file=relative_to_assets("mini_text_area.png"))
     image_4 = canvas.create_image(
         107.0,
         435.0,
@@ -168,7 +168,7 @@ def run_window(window, canvas):
     )
 
     entry_image_4 = PhotoImage(
-        file=relative_to_assets("entry_4.png"))
+        file=relative_to_assets("mini_text_entry.png"))
     entry_bg_4 = canvas.create_image(
         107.5,
         436.0,
@@ -188,7 +188,7 @@ def run_window(window, canvas):
     lista.append(entry_4)
 
     image_image_5 = PhotoImage(
-        file=relative_to_assets("image_5.png"))
+        file=relative_to_assets("text_area.png"))
     image_5 = canvas.create_image(
         180.0,
         510.0,
@@ -196,7 +196,7 @@ def run_window(window, canvas):
     )
 
     entry_image_5 = PhotoImage(
-        file=relative_to_assets("entry_5.png"))
+        file=relative_to_assets("text_entry.png"))
     entry_bg_5 = canvas.create_image(
         180.0,
         511.0,
@@ -216,7 +216,7 @@ def run_window(window, canvas):
     lista.append(entry_5)
 
     image_image_6 = PhotoImage(
-        file=relative_to_assets("image_6.png"))
+        file=relative_to_assets("logo.png"))
     image_6 = canvas.create_image(
         180.0,
         84.0,
@@ -242,7 +242,7 @@ def run_window(window, canvas):
     )
 
     button_image_3 = PhotoImage(
-        file=relative_to_assets("button_3.png"))
+        file=relative_to_assets("paypal_button.png"))
     button_3 = Button(
         image=button_image_3,
         borderwidth=0,
