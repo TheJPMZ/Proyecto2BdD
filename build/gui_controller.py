@@ -1,8 +1,13 @@
-from tkinter       import Canvas, Frame, Tk
-from Login         import gui as Login
-from Signin        import gui as Sign
-from SelectProfile import gui as SProfile
-from CreateProfile import gui as CProfile
+from tkinter       import Canvas, Tk
+import login as Login
+import createProfile as CProfile
+import selectProfile as SProfile
+import signIn as Sign
+
+
+
+
+
 
 
 def createWindow():
@@ -28,7 +33,7 @@ def createWindow():
 
 def main():
     window, canvas = createWindow()
-    Login.run_window(window,canvas)
+    Login.run_window(window, canvas)
     window.mainloop()
 
 

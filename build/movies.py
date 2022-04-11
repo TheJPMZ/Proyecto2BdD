@@ -3,12 +3,15 @@ import time
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from SelectProfile import gui as SProfile
+import login as Login
+import createProfile as CProfile
+import selectProfile as SProfile
+import signIn as Sign
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 import webbrowser
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path("./assets")
+ASSETS_PATH = OUTPUT_PATH / Path("assets")
 
 
 def relative_to_assets(path: str) -> Path:
@@ -116,7 +119,7 @@ def run_window(window, canvas, profile):
     )
 
     button_image_4 = PhotoImage(
-        file=relative_to_assets("button_4.png"))
+        file=relative_to_assets("movie_button.png"))
     button_4 = Button(
         image=button_image_4,
         borderwidth=0,

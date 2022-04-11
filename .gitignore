@@ -6,3 +6,4 @@ build/SelectProfile/__pycache__/
 build/Signin/__pycache__/
 __pycache__/
 /.idea/
+/.vscode/

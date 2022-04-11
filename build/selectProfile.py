@@ -2,13 +2,15 @@
 # https://github.com/ParthJadhav/Tkinter-Designer
 
 from pathlib import Path
-from tkinter import Label, Tk, Canvas, Entry, Text, Button, PhotoImage, font
-from Login         import gui as Login
-from CreateProfile import gui as CProfile
-from Movies        import gui as Movies
+from tkinter import Label, Button, PhotoImage, font
+import login as Login
+import createProfile as CProfile
+import selectProfile as SProfile
+import signIn as Sign
+import movies as Movies
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path("../assets")
+ASSETS_PATH = OUTPUT_PATH / Path("assets")
 
 profiles = [('U1','perfil1',20,1),('U1','perfil2',20,2)]
 

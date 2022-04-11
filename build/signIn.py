@@ -8,12 +8,14 @@ from pathlib import Path
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
-from Login         import gui as Login
-from SelectProfile import gui as SProfile
+import login as Login
+import createProfile as CProfile
+import selectProfile as SProfile
+import signIn as Sign
 import webbrowser
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path("../assets")
+ASSETS_PATH = OUTPUT_PATH / Path("assets")
 
 
 lista = []

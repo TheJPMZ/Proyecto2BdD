@@ -3,8 +3,10 @@
 # https://github.com/ParthJadhav/Tkinter-Designer
 
 from pathlib import Path
-from Signin        import gui as Sign
-from SelectProfile import gui as SProfile
+import login as Login
+import createProfile as CProfile
+import selectProfile as SProfile
+import signIn as Sign
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
@@ -18,7 +20,7 @@ def some_callback(entry):
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path("../assets")
+ASSETS_PATH = OUTPUT_PATH / Path("assets")
 
 lista = []
 
