@@ -8,10 +8,13 @@ from pathlib import Path
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
-from SelectProfile import gui as SProfile
+import login as Login
+import createProfile as CProfile
+import selectProfile as SProfile
+import signIn as Sign
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path("./assets")
+ASSETS_PATH = OUTPUT_PATH / Path("assets")
 
 lista = []
 
@@ -37,7 +40,7 @@ def run_window(window,canvas):
     )
 
     button_image_1 = PhotoImage(
-        file=relative_to_assets("button_1.png"))
+        file=relative_to_assets("return_button.png"))
     button_1 = Button(
         image=button_image_1,
         borderwidth=0,
@@ -53,7 +56,7 @@ def run_window(window,canvas):
     )
 
     button_image_2 = PhotoImage(
-        file=relative_to_assets("button_2.png"))
+        file=relative_to_assets("create_button.png"))
     button_2 = Button(
         image=button_image_2,
         borderwidth=0,
@@ -69,7 +72,7 @@ def run_window(window,canvas):
     )
 
     image_image_1 = PhotoImage(
-        file=relative_to_assets("image_1.png"))
+        file=relative_to_assets("test_area.png"))
     image_1 = canvas.create_image(
         180.0,
         329.0,
@@ -77,7 +80,7 @@ def run_window(window,canvas):
     )
 
     entry_image_1 = PhotoImage(
-        file=relative_to_assets("entry_1.png"))
+        file=relative_to_assets("text_entry.png"))
     entry_bg_1 = canvas.create_image(
         180.0,
         330.0,
@@ -96,7 +99,7 @@ def run_window(window,canvas):
     )
 
     image_image_2 = PhotoImage(
-        file=relative_to_assets("image_2.png"))
+        file=relative_to_assets("test_area.png"))
     image_2 = canvas.create_image(
         180.0,
         408.0,
@@ -104,7 +107,7 @@ def run_window(window,canvas):
     )
 
     entry_image_2 = PhotoImage(
-        file=relative_to_assets("entry_2.png"))
+        file=relative_to_assets("text_entry.png"))
     entry_bg_2 = canvas.create_image(
         180.0,
         409.0,
@@ -141,7 +144,7 @@ def run_window(window,canvas):
     )
 
     image_image_3 = PhotoImage(
-        file=relative_to_assets("image_3.png"))
+        file=relative_to_assets("profile_picture.png"))
     image_3 = canvas.create_image(
         179.0,
         194.0,
