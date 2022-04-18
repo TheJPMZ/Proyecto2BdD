@@ -47,10 +47,38 @@ def rep_cuenta(fecha1,fecha2):
 def cant_cuentas():
     connection = conexion()
     
-def top10_directores():
-    connection = conexion()
-
 def top10_actores():
+    try:
+        connection = conexion()
+        cursor = connection.cursor()
+        postgres_select_query = """ SELECT ACTOR.NOMBRE, COUNT(ACTOR)
+                                    FROM ACTOR
+                                    INNER JOIN(	SELECT *
+                                                FROM	PERFIL
+                                                NATURAL JOIN 	USUARIO
+                                                NATURAL JOIN	VER
+                                                WHERE	CUENTA ILIKE 'Avanzada' 
+                                                OR 		CUENTA ILIKE 'Estandar') VUP_SUB 
+                                    ON VUP_SUB.CPELICULA = ACTOR.CPELICULA
+                                    GROUP BY ACTOR.NOMBRE
+                                    ORDER BY ACTOR.NOMBRE DESC
+                                    LIMIT 10"""
+                                    
+        cursor.execute(postgres_select_query)
+        records = cursor.fetchall()
+        print("\nTop 10 actores más vistos: ")
+        print("----------------------------------------------------")
+        for row in records:
+            print("\nActor: " + row[0], " | Cantidad vista: " + str(row[1]))
+            
+            
+    except (Exception, psycopg2.Error) as error:
+        print("\nError while fetching data from PostgreSQL", error)
+
+
+
+
+def top10_directores():
     connection = conexion()
     
 def hora_pico(fecha):
@@ -58,3 +86,10 @@ def hora_pico(fecha):
     
 
 top10_generos()
+
+
+''' INSERT INTO VER(
+	cperfil, cpelicula, DURACION, FECHA)
+VALUES (
+	'Per1','P7', 45, NOW())
+; '''
