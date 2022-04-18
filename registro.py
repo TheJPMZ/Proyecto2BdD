@@ -7,7 +7,7 @@ def Registro(username,email,password, name, account):
         connection = pass_manager.conexion()
         cursor = connection.cursor()
         if pass_manager.check_user(username) == False:
-            codigo = """ SELECT CODIGO FROM usuario ORDER BY CODIGO DESC LIMIT 1 """
+            codigo = """ SELECT CUsuario FROM usuario ORDER BY CUsuario DESC LIMIT 1 """
             cursor.execute(codigo)
             res = cursor.fetchone()[0]
             
@@ -17,8 +17,8 @@ def Registro(username,email,password, name, account):
             res = ''.join('U' + str(int(res)+1))
             
             
-            postgres_select_query = """ INSERT INTO usuario(edad,codigo,username,nombre,apellido,password, email) VALUES (20,'%s','%s','%s','','%s','%s')"""
-            cursor.execute(postgres_select_query % (res,username,name,password,email))
+            postgres_select_query = """ INSERT INTO usuario(cusuario, username, nombre, password, email, cuenta) VALUES ('%s','%s','%s','%s','%s','%s')"""
+            cursor.execute(postgres_select_query % (res,username,name,password,email,account))
             
             
             connection.commit()
@@ -30,6 +30,3 @@ def Registro(username,email,password, name, account):
             
     except (Exception, psycopg2.Error) as error:
         print("Error while fetching data from PostgreSQL", error)
-        
-        
-Registro('Jorge01','juan@gmail.com','juan','juan','premium')

@@ -1,3 +1,4 @@
+from tkinter import messagebox
 
 from hash import hash
 from operator import pos
@@ -5,7 +6,7 @@ import psycopg2
 
 def conexion():
     connection = psycopg2.connect(user="postgres",
-                                    password="C1Molina!",
+                                    password="iamgreat",
                                     host="localhost",
                                     port="5432",
                                     database="Proyecto02")
@@ -34,7 +35,8 @@ def check_user(user):
             connection.close()
 
 
-def check_pass(user,psswrd):
+def check_pass(user,pss):
+    psswrd = hash(pss)
     try:
         connection = conexion()
         cursor = connection.cursor()
@@ -47,6 +49,7 @@ def check_pass(user,psswrd):
                 return True
             else: return False
     except (Exception, psycopg2.Error) as error:
+        messagebox.showerror("Error", "No se pudo conectar a la base de datos")
         print("Failed to connect to the database", error)
 
 

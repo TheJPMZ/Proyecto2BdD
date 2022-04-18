@@ -49,14 +49,11 @@ def display_pelicula_actor(actor):
     try:
         connection = conexion()
         cursor = connection.cursor()
-        postgres_select_query = """ SELECT 	NOMBRE, DURACION
-                                    FROM	PELICULA
-                                    INNER JOIN(	SELECT 	CPELICULA 
-                                                FROM	CASTING
-                                                INNER JOIN (SELECT 	CODIGO,	NOMBRE
-                                                            FROM	ACTOR
-                                                            WHERE	NOMBRE ILIKE '%s') A_REQUEST ON A_REQUEST.CODIGO = CASTING.CACTOR) A_CAST_REQUEST 
-                                    ON	A_CAST_REQUEST.CPELICULA = PELICULA.CODIGO  """
+        postgres_select_query = """ SELECT *
+                                    FROM pelicula p
+                                    JOIN actor a
+                                    ON p.cpelicula = a.cpelicula
+                                    WHERE a.nombre Ilike '%s'"""
         cursor.execute(postgres_select_query % (actor))
         records = cursor.fetchall()
         print("\nPeliculas del actor: " + actor)

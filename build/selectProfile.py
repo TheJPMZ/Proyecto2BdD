@@ -8,6 +8,7 @@ import createProfile as CProfile
 import selectProfile as SProfile
 import signIn as Sign
 import movies as Movies
+import variables
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("assets")
@@ -32,7 +33,8 @@ def enter(destiny, window, canvas, profile):
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-def run_window(window, canvas):
+def run_window(window, canvas, args=[]):
+    profiles = variables.global_profiles
 
     canvas.delete("all")
 
