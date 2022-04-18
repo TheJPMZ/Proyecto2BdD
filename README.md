@@ -28,5 +28,6 @@ Nota: De momento no se crearon todas las tablas porque el dise;o se cambio a ult
 
 
 ## Diagrama Entidad Relacion
-![imagen](https://user-images.githubusercontent.com/64183934/158737487-e005771e-5edb-4017-a51f-4bc2a8767d83.png)
+![imagen](https://user-images.githubusercontent.com/64183934/163818588-6a78bb9c-2cb6-4e0d-a11a-6a6f67d4e748.png)
+
 
