@@ -10,16 +10,11 @@ def busqueda_actor(actor):
         postgres_select_query = """ SELECT * FROM actor WHERE nombre = '%s' """
         cursor.execute(postgres_select_query % (actor))
         records = cursor.fetchall()
-        return (len(records)==0, records)
+        return (len(records)>0)
     
     except (Exception, psycopg2.Error) as error:
         print("Error while fetching data from PostgreSQL", error)
-    finally:
-        # closing database connection.
-        if (connection):
-            cursor.close()
-            connection.close()
-            print("PostgreSQL connection is closed")
+
             
             
 def busqueda_genero(genero):
@@ -29,15 +24,66 @@ def busqueda_genero(genero):
         postgres_select_query = """ SELECT * FROM genero WHERE nombre = '%s' """
         cursor.execute(postgres_select_query % (genero))
         records = cursor.fetchall()
-        return (len(records)==0, records)
+        return (len(records)>0)
     
     except (Exception, psycopg2.Error) as error:
         print("Error while fetching data from PostgreSQL", error)
-    finally:
-        # closing database connection.
-        if (connection):
-            cursor.close()
-            connection.close()
-            print("PostgreSQL connection is closed")
-            
-busqueda_actor("Will")
+        
+def busqueda_pelicula(pelicula):
+    try:
+        connection = conexion()
+        cursor = connection.cursor()
+        postgres_select_query = """ SELECT * FROM pelicula WHERE nombre = '%s' """
+        cursor.execute(postgres_select_query % (pelicula))
+        records = cursor.fetchall()
+        return (len(records)>0)
+    
+    except (Exception, psycopg2.Error) as error:
+        print("Error while fetching data from PostgreSQL", error)
+        
+        
+def display_pelicula_actor(actor):
+    try:
+        connection = conexion()
+        cursor = connection.cursor()
+        postgres_select_query = """ SELECT 	NOMBRE, DURACION
+                                    FROM	PELICULA
+                                    INNER JOIN(	SELECT 	CPELICULA 
+                                                FROM	CASTING
+                                                INNER JOIN (SELECT 	CODIGO,	NOMBRE
+                                                            FROM	ACTOR
+                                                            WHERE	NOMBRE ILIKE '%s') A_REQUEST ON A_REQUEST.CODIGO = CASTING.CACTOR) A_CAST_REQUEST 
+                                    ON	A_CAST_REQUEST.CPELICULA = PELICULA.CODIGO  """
+        cursor.execute(postgres_select_query % (actor))
+        records = cursor.fetchall()
+        print("\nPeliculas del actor: " + actor)
+        for row in records:
+            print("------------------------------")
+            print("\nNombre: ", row[0], "\nDuracion: ", row[1], "\n")
+    
+    except (Exception, psycopg2.Error) as error:
+        print("Error while fetching data from PostgreSQL", error)
+    
+def display_pelicula_genero(genero):
+    try:
+        connection = conexion()
+        cursor = connection.cursor()
+        postgres_select_query = """ SELECT 	NOMBRE,G_REQUEST.NOMBRE_GENERO ,DURACION
+                                    FROM	PELICULA
+                                    INNER JOIN (SELECT 	CODIGO,	NOMBRE_GENERO
+                                                FROM	GENERO
+                                                WHERE	NOMBRE_GENERO ILIKE '%s') G_REQUEST ON G_REQUEST.CODIGO = PELICULA.GENERO"""
+        cursor.execute(postgres_select_query % (genero))
+        records = cursor.fetchall()
+        print("\nPeliculas del genero: " + genero)
+        for row in records:
+            print("------------------------------")
+            print("\nNombre: ", row[0], "\nGénero: ", row[1],"\nDuracion: ", row[2], "\n")
+    
+    except (Exception, psycopg2.Error) as error:
+        print("Error while fetching data from PostgreSQL", error)
+        
+        
+        
+display_pelicula_genero('Accion')
+
