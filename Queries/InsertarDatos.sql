@@ -114,3 +114,9 @@ INSERT INTO favoritos(
 VALUES (
 	'Per1','P7')
 ;
+
+INSERT INTO	LOGINLOG
+(
+	CODIGO, UIngreso, PIngreso, FECHA,
+)
+VALUES (1,'Test','Test','2022-04-18');
