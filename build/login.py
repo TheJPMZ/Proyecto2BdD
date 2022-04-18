@@ -3,8 +3,10 @@
 # https://github.com/ParthJadhav/Tkinter-Designer
 
 from pathlib import Path
-from Signin        import gui as Sign
-from SelectProfile import gui as SProfile
+import login as Login
+import createProfile as CProfile
+import selectProfile as SProfile
+import signIn as Sign
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
@@ -18,7 +20,7 @@ def some_callback(entry):
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path("./assets")
+ASSETS_PATH = OUTPUT_PATH / Path("assets")
 
 lista = []
 
@@ -37,13 +39,13 @@ def run_window(window,canvas):
     canvas.delete("all")
 
     button_image_1 = PhotoImage(
-        file=relative_to_assets("button_1.png"))
+        file=relative_to_assets("signup_button.png"))
     button_1 = Button(
         master = canvas,
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command= lambda: move(SProfile,window, canvas),
+        command= lambda: move(Sign,window, canvas),
         relief="flat"
     )
     button_1.place(
@@ -55,7 +57,7 @@ def run_window(window,canvas):
     lista.append(button_1)
 
     button_image_2 = PhotoImage(
-        file=relative_to_assets("button_2.png"))
+        file=relative_to_assets("login_button.png"))
     button_2 = Button (
         master = canvas,
         image = button_image_2,
@@ -73,7 +75,7 @@ def run_window(window,canvas):
     lista.append(button_2)
 
     image_image_1 = PhotoImage(
-        file=relative_to_assets("image_1.png"))
+        file=relative_to_assets("text_area.png"))
     image_1 = canvas.create_image(
         180.0,
         291.0,
@@ -81,7 +83,7 @@ def run_window(window,canvas):
     )
 
     entry_image_1 = PhotoImage(
-        file=relative_to_assets("entry_1.png"))
+        file=relative_to_assets("text_entry.png"))
     entry_bg_1 = canvas.create_image(
         180.0,
         292.0,
@@ -106,7 +108,7 @@ def run_window(window,canvas):
     lista.append(entry_1)
 
     image_image_2 = PhotoImage(
-        file=relative_to_assets("image_2.png"))
+        file=relative_to_assets("text_area.png"))
     image_2 = canvas.create_image(
         180.0,
         370.0,
@@ -114,7 +116,7 @@ def run_window(window,canvas):
     )
 
     entry_image_2 = PhotoImage(
-        file=relative_to_assets("entry_2.png"))
+        file=relative_to_assets("text_entry.png"))
     entry_bg_2 = canvas.create_image(
         180.0,
         371.0,
@@ -148,7 +150,7 @@ def run_window(window,canvas):
     )
 
     image_image_3 = PhotoImage(
-        file=relative_to_assets("image_3.png"))
+        file=relative_to_assets("logo.png"))
     image_3 = canvas.create_image(
         180.0,
         117.0,
