@@ -1,5 +1,5 @@
 INSERT INTO pelicula(
-	cpelicula, nombre, duracion, clasificacion, imagen, link)
+	cpelicula, nombre, duracion, clasificacion, imagen, link, director)
 VALUES (
 	'P1',	'Matrix',	136,	18,	'https://m.media-amazon.com/images/M/MV5BYWQxMzg0OGYtNGE3Yi00OGY4LWJjZDktZWZiODE2N2MyODgzXkEyXkFqcGdeQXVyMTYzMDM0NTU@._V1_QL75_UY281_CR13,0,190,281_.jpg','https://www.imdb.com/video/vi1032782617?playlistId=tt0133093&ref_=tt_pr_ov_vi','Wachowski Sisters') , (
 	'P2',	'El señor de los anillos: La comunidad del anillo',	178,	12,	'https://m.media-amazon.com/images/M/MV5BMzgyNjdjOWMtMjAyYy00NzQ4LWIwYTQtZDk2ZDQzYWVlN2IwXkEyXkFqcGdeQXVyMTYzMDM0NTU@._V1_QL75_UY281_CR3,0,190,281_.jpg','https://www.imdb.com/video/vi684573465?playlistId=tt0120737&ref_=tt_pr_ov_vi','Peter Jackson' ) , (
@@ -14,7 +14,7 @@ VALUES (
 ;	
 
 INSERT INTO actor(
-	cactor, nombre)
+	cpelicula, nombre)
 VALUES (
 	'P1','Keanu Reeves') , (
 	'P1','Laurence Fishburne') , (
