@@ -21,7 +21,7 @@ def busqueda_genero(genero):
     try:
         connection = conexion()
         cursor = connection.cursor()
-        postgres_select_query = """ SELECT * FROM genero WHERE nombre = '%s' """
+        postgres_select_query = """ SELECT * FROM genero WHERE nombre_genero = '%s' """
         cursor.execute(postgres_select_query % (genero))
         records = cursor.fetchall()
         return (len(records)>0)
@@ -96,5 +96,5 @@ def display_cualquiera(dato):
         print("\nNo se encontró el dato: " + dato + "\n")
         
 
-display_cualquiera('Will')
+display_cualquiera('Accion')
 
