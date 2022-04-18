@@ -2,7 +2,7 @@ from pass_manager import conexion
 import psycopg2
 
 
-#Busqueda para recopilar todas las peliculas de un actor.
+#Busqueda para ver si el actor se encuentra en la base de datos
 def busqueda_actor(actor):
     try:
         connection = conexion()
@@ -16,7 +16,7 @@ def busqueda_actor(actor):
         print("\nError while fetching data from PostgreSQL", error)
 
             
-            
+#Busqueda para ver si el genero se encuentra en la base de datos 
 def busqueda_genero(genero):
     try:
         connection = conexion()
@@ -28,7 +28,9 @@ def busqueda_genero(genero):
     
     except (Exception, psycopg2.Error) as error:
         print("\nError while fetching data from PostgreSQL", error)
-        
+  
+  
+#Busqueda para ver si la pelicula se encuentra en la base de datos       
 def busqueda_pelicula(pelicula):
     try:
         connection = conexion()
@@ -41,7 +43,8 @@ def busqueda_pelicula(pelicula):
     except (Exception, psycopg2.Error) as error:
         print("\nError while fetching data from PostgreSQL", error)
         
-        
+    
+#Muestra todas las peliculas relacionadas con un actor dado 
 def display_pelicula_actor(actor):
     try:
         connection = conexion()
@@ -64,6 +67,7 @@ def display_pelicula_actor(actor):
     except (Exception, psycopg2.Error) as error:
         print("Error while fetching data from PostgreSQL", error)
     
+#Muestra todas las peliculas relacionadas con un genero dado
 def display_pelicula_genero(genero):
     try:
         connection = conexion()
@@ -82,7 +86,8 @@ def display_pelicula_genero(genero):
     
     except (Exception, psycopg2.Error) as error:
         print("\nError while fetching data from PostgreSQL", error)
-        
+      
+#Muestra todas las peliculas relacionadas con un dato dado, este puede ser un actor, un genero o una pelicula  
 def display_cualquiera(dato):
     if busqueda_actor(dato):
         display_pelicula_actor(dato)
@@ -96,5 +101,4 @@ def display_cualquiera(dato):
         print("\nNo se encontró el dato: " + dato + "\n")
         
 
-display_cualquiera('Accion')
 
