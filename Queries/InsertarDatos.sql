@@ -1,20 +1,20 @@
 INSERT INTO pelicula(
 	cpelicula, nombre, duracion, clasificacion, imagen, link)
 VALUES (
-	'P1',	'Matrix',	136,	18,	'https://m.media-amazon.com/images/M/MV5BYWQxMzg0OGYtNGE3Yi00OGY4LWJjZDktZWZiODE2N2MyODgzXkEyXkFqcGdeQXVyMTYzMDM0NTU@._V1_QL75_UY281_CR13,0,190,281_.jpg','https://www.imdb.com/video/vi1032782617?playlistId=tt0133093&ref_=tt_pr_ov_vi' ) , (
-	'P2',	'El señor de los anillos: La comunidad del anillo',	178,	12,	'https://m.media-amazon.com/images/M/MV5BMzgyNjdjOWMtMjAyYy00NzQ4LWIwYTQtZDk2ZDQzYWVlN2IwXkEyXkFqcGdeQXVyMTYzMDM0NTU@._V1_QL75_UY281_CR3,0,190,281_.jpg','https://www.imdb.com/video/vi684573465?playlistId=tt0120737&ref_=tt_pr_ov_vi' ) , (
-	'P3',	'El señor de los anillos: Las dos torres',	179,	12,	'https://m.media-amazon.com/images/M/MV5BY2YyYjVlZDgtYTVkNy00MjdmLWFhNjctY2RlYWNhMzMyYTczXkEyXkFqcGdeQXVyODc0OTEyNDU@._V1_QL75_UY*_.jpg','https://www.imdb.com/video/vi701350681?playlistId=tt0167261&ref_=tt_ov_vi' ) , (
-	'P4',	'El señor de los anillos: El retorno del rey',	201,	12,	'https://m.media-amazon.com/images/M/MV5BNGJjODMxZGMtOTFlNC00MjI4LThiZWUtZTU3ZGIxYzcxMTBiXkEyXkFqcGdeQXVyODc0OTEyNDU@._V1_QL75_UY*_.jpg','https://www.imdb.com/video/vi718127897?playlistId=tt0167260&ref_=tt_pr_ov_vi' ) , (
-	'P5',	'Turning Red',	100,	10,	'https://m.media-amazon.com/images/M/MV5BNjY0MGEzZmQtZWMxNi00MWVhLWI4NWEtYjQ0MDkyYTJhMDU0XkEyXkFqcGdeQXVyODc0OTEyNDU@._V1_QL75_UX*_CR0,0,*_.jpg','https://www.imdb.com/video/vi3974546201?playlistId=tt8097030&ref_=tt_ov_vi' ) , (
-	'P6',	'Encanto',	102,	0,	'https://m.media-amazon.com/images/M/MV5BNjE5NzA4ZDctOTJkZi00NzM0LTkwOTYtMDI4MmNkMzIxODhkXkEyXkFqcGdeQXVyNjY1MTg4Mzc@._V1_QL75_UX*_CR0,0,*_.jpg','https://www.imdb.com/video/vi4093755417?playlistId=tt2953050&ref_=tt_ov_vi' ) , (
-	'P7',	'Game of Thrones',	57,	18,	'https://m.media-amazon.com/images/M/MV5BOGY1NDQ1MDMtYTY1ZS00MGQ1LTg5ZTgtMDljM2IxY2NhODJhXkEyXkFqcGdeQXVyMTYzMDM0NTU@._V1_QL75_UY*_.jpg','https://www.youtube.com/watch?v=TZE9gVF1QbA' ) , (
-	'P8',	'Terminator: Génesis',	126,	12,	'https://m.media-amazon.com/images/M/MV5BMjM1NTc0NzE4OF5BMl5BanBnXkFtZTgwNDkyNjQ1NTE@._V1_QL75_UX*_CR0,*_.jpg','https://www.imdb.com/video/vi1249751321?playlistId=tt1340138&ref_=tt_ov_vi' ) , (
-	'P9',	'Death on the Nile',	127,	13,	'https://resizing.flixster.com/ndFvbUyQAZgUf5dXVl1_n2DY3x4=/206x305/v2/https://resizing.flixster.com/T2N9zgvfcLehEt1EkYNrLRaNPXU=/ems.ZW1zLXByZC1hc3NldHMvbW92aWVzLzgzYTg5ODBlLWY5MzMtNGIyYi04MWU0LTMwZTgwYTUyYjIyMS5qcGc=','https://www.youtube.com/watch?v=dZRqB0JLizw' )
+	'P1',	'Matrix',	136,	18,	'https://m.media-amazon.com/images/M/MV5BYWQxMzg0OGYtNGE3Yi00OGY4LWJjZDktZWZiODE2N2MyODgzXkEyXkFqcGdeQXVyMTYzMDM0NTU@._V1_QL75_UY281_CR13,0,190,281_.jpg','https://www.imdb.com/video/vi1032782617?playlistId=tt0133093&ref_=tt_pr_ov_vi','Wachowski Sisters') , (
+	'P2',	'El señor de los anillos: La comunidad del anillo',	178,	12,	'https://m.media-amazon.com/images/M/MV5BMzgyNjdjOWMtMjAyYy00NzQ4LWIwYTQtZDk2ZDQzYWVlN2IwXkEyXkFqcGdeQXVyMTYzMDM0NTU@._V1_QL75_UY281_CR3,0,190,281_.jpg','https://www.imdb.com/video/vi684573465?playlistId=tt0120737&ref_=tt_pr_ov_vi','Peter Jackson' ) , (
+	'P3',	'El señor de los anillos: Las dos torres',	179,	12,	'https://m.media-amazon.com/images/M/MV5BY2YyYjVlZDgtYTVkNy00MjdmLWFhNjctY2RlYWNhMzMyYTczXkEyXkFqcGdeQXVyODc0OTEyNDU@._V1_QL75_UY*_.jpg','https://www.imdb.com/video/vi701350681?playlistId=tt0167261&ref_=tt_ov_vi','Peter Jackson' ) , (
+	'P4',	'El señor de los anillos: El retorno del rey',	201,	12,	'https://m.media-amazon.com/images/M/MV5BNGJjODMxZGMtOTFlNC00MjI4LThiZWUtZTU3ZGIxYzcxMTBiXkEyXkFqcGdeQXVyODc0OTEyNDU@._V1_QL75_UY*_.jpg','https://www.imdb.com/video/vi718127897?playlistId=tt0167260&ref_=tt_pr_ov_vi','Peter Jackson' ) , (
+	'P5',	'Turning Red',	100,	10,	'https://m.media-amazon.com/images/M/MV5BNjY0MGEzZmQtZWMxNi00MWVhLWI4NWEtYjQ0MDkyYTJhMDU0XkEyXkFqcGdeQXVyODc0OTEyNDU@._V1_QL75_UX*_CR0,0,*_.jpg','https://www.imdb.com/video/vi3974546201?playlistId=tt8097030&ref_=tt_ov_vi','Domee Shi' ) , (
+	'P6',	'Encanto',	102,	0,	'https://m.media-amazon.com/images/M/MV5BNjE5NzA4ZDctOTJkZi00NzM0LTkwOTYtMDI4MmNkMzIxODhkXkEyXkFqcGdeQXVyNjY1MTg4Mzc@._V1_QL75_UX*_CR0,0,*_.jpg','https://www.imdb.com/video/vi4093755417?playlistId=tt2953050&ref_=tt_ov_vi','Byron Howard' ) , (
+	'P7',	'Game of Thrones',	57,	18,	'https://m.media-amazon.com/images/M/MV5BOGY1NDQ1MDMtYTY1ZS00MGQ1LTg5ZTgtMDljM2IxY2NhODJhXkEyXkFqcGdeQXVyMTYzMDM0NTU@._V1_QL75_UY*_.jpg','https://www.youtube.com/watch?v=TZE9gVF1QbA','David Benioff y D.B Weiss') , (
+	'P8',	'Terminator: Génesis',	126,	12,	'https://m.media-amazon.com/images/M/MV5BMjM1NTc0NzE4OF5BMl5BanBnXkFtZTgwNDkyNjQ1NTE@._V1_QL75_UX*_CR0,*_.jpg','https://www.imdb.com/video/vi1249751321?playlistId=tt1340138&ref_=tt_ov_vi','Alan Taylor') , (
+	'P9',	'Death on the Nile',	127,	13,	'https://resizing.flixster.com/ndFvbUyQAZgUf5dXVl1_n2DY3x4=/206x305/v2/https://resizing.flixster.com/T2N9zgvfcLehEt1EkYNrLRaNPXU=/ems.ZW1zLXByZC1hc3NldHMvbW92aWVzLzgzYTg5ODBlLWY5MzMtNGIyYi04MWU0LTMwZTgwYTUyYjIyMS5qcGc=','https://www.youtube.com/watch?v=dZRqB0JLizw','Kenneth Branagh' )
 
-;
+;	
 
 INSERT INTO actor(
-	cpelicula, nombre)
+	cactor, nombre)
 VALUES (
 	'P1','Keanu Reeves') , (
 	'P1','Laurence Fishburne') , (
