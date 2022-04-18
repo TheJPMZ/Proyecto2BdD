@@ -1,4 +1,6 @@
+from datetime import datetime
 from tkinter import messagebox
+import time
 
 from hash import hash
 from operator import pos
@@ -41,6 +43,18 @@ def check_pass(user,pss):
         connection = conexion()
         cursor = connection.cursor()
         if (check_user(user)):
+
+            postgres_select_query = """ SELECT * FROM loginLog order by codigo desc"""
+            cursor.execute(postgres_select_query)
+            res = cursor.fetchone()[0]
+            code = str(int(res)+1)
+
+            ts = time.time()
+
+            postgres_select_query = """ INSERT INTO loginlog(codigo, uingreso, pingreso, fecha) VALUES ('%s','%s','%s','%s')"""
+            cursor.execute(postgres_select_query % (code,user,psswrd,ts))
+            connection.commit()
+
             postgres_select_query = """ SELECT password FROM usuario WHERE username = '%s'"""
             cursor.execute(postgres_select_query % user)
             total = cursor.fetchall()

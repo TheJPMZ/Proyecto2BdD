@@ -28,10 +28,10 @@ ASSETS_PATH = OUTPUT_PATH / Path("assets")
 lista = []
 
 
-def move(destiny,window, canvas, args=[]):
+def move(destiny,window, canvas):
     for x in lista:
         x.destroy()
-    destiny.run_window(window, canvas, args)
+    destiny.run_window(window, canvas)
 
 
 def relative_to_assets(path: str) -> Path:
@@ -187,7 +187,7 @@ def run_window(window,canvas):
             try:
                 connection = manager.conexion()
                 cursor = connection.cursor()
-                postgres_select_query = """ SELECT cusuario, profilename, edad, lognumber, cuenta
+                postgres_select_query = """ SELECT cusuario, profilename, edad, lognumber, cuenta, cperfil
                                             FROM perfil
                                             NATURAL JOIN usuario
                                             WHERE username = '%s'"""

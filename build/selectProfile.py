@@ -13,8 +13,6 @@ import variables
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("assets")
 
-profiles = [('U1','perfil1',20,1),('U1','perfil2',20,2)]
-
 lista = []
 buttons = []
 

@@ -15,6 +15,8 @@ import signIn as Sign
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 import webbrowser
 
+import variables
+
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("assets")
 
@@ -34,6 +36,9 @@ def move(destiny, window, canvas):
 
 def run_window(window, canvas, profile):
     perfil = profile
+    variables.global_this_profile = profile[5]
+
+    print(profile[5])
 
     canvas.delete("all")
 

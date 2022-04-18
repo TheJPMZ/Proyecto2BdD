@@ -7,13 +7,15 @@ from pathlib import Path
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, StringVar, OptionMenu, messagebox
 import login as Login
 import createProfile as CProfile
+import registro
 import selectProfile as SProfile
 import signIn as Sign
 import webbrowser
 import registro as reg
+import variables
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("assets")
@@ -25,6 +27,11 @@ def move(destiny,window, canvas):
     for x in lista:
         x.destroy()
     destiny.run_window(window, canvas)
+
+def some_callback(entry):
+    entry.config(fg="black")# note that you must include the event as an arg, even if you don't use it.
+    entry.delete(0, "end")
+    return None
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
@@ -57,7 +64,7 @@ def run_window(window, canvas):
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: move(SProfile,window,canvas),
+        command=lambda: Registrarse((entry_1,entry_2,entry_3,entry_5,cuenta)),
         relief="flat"
     )
     button_2.place(
@@ -87,7 +94,8 @@ def run_window(window, canvas):
     entry_1 = Entry(
         bd=0,
         bg="#F2F2F2",
-        highlightthickness=0
+        highlightthickness=0,
+        fg = "grey"
     )
     entry_1.place(
         x=49.0,
@@ -95,6 +103,9 @@ def run_window(window, canvas):
         width=262.0,
         height=32.0
     )
+    entry_1.insert(0, "Name")
+
+    entry_1.bind("<Button-1>", lambda x: some_callback(entry_1))
     lista.append(entry_1)
 
     canvas.create_text(
@@ -124,7 +135,8 @@ def run_window(window, canvas):
     entry_2 = Entry(
         bd=0,
         bg="#F2F2F2",
-        highlightthickness=0
+        highlightthickness=0,
+        fg = "grey"
     )
     entry_2.place(
         x=49.0,
@@ -132,6 +144,11 @@ def run_window(window, canvas):
         width=262.0,
         height=32.0
     )
+    entry_2.insert(0, "Username")
+
+    entry_2.bind("<Button-1>", lambda x: some_callback(entry_2))
+
+
     lista.append(entry_2)
 
     image_image_3 = PhotoImage(
@@ -152,7 +169,8 @@ def run_window(window, canvas):
     entry_3 = Entry(
         bd=0,
         bg="#F2F2F2",
-        highlightthickness=0
+        highlightthickness=0,
+        fg = "grey"
     )
     entry_3.place(
         x=49.0,
@@ -160,6 +178,10 @@ def run_window(window, canvas):
         width=262.0,
         height=32.0
     )
+    entry_3.insert(0, "Password")
+
+    entry_3.bind("<Button-1>", lambda x: some_callback(entry_3))
+
     lista.append(entry_3)
 
     image_image_4 = PhotoImage(
@@ -180,8 +202,15 @@ def run_window(window, canvas):
     entry_4 = Entry(
         bd=0,
         bg="#F2F2F2",
-        highlightthickness=0
+        highlightthickness=0,
+        fg="grey"
     )
+
+    cuenta = StringVar(window)
+    cuenta.set('Gratis [$0.00]')
+
+    entry_4 = OptionMenu(window, cuenta, "Gratis [$0.00]", "Estandar [$5.50]", "Avanzada [$9.00]")
+
     entry_4.place(
         x=44.0,
         y=419.0,
@@ -208,7 +237,8 @@ def run_window(window, canvas):
     entry_5 = Entry(
         bd=0,
         bg="#F2F2F2",
-        highlightthickness=0
+        highlightthickness=0,
+        fg = "grey"
     )
     entry_5.place(
         x=49.0,
@@ -216,6 +246,11 @@ def run_window(window, canvas):
         width=262.0,
         height=32.0
     )
+
+    entry_5.insert(0, "Email")
+
+    entry_5.bind("<Button-1>", lambda x: some_callback(entry_5))
+
     lista.append(entry_5)
 
     image_image_6 = PhotoImage(
@@ -289,14 +324,22 @@ def run_window(window, canvas):
     )
     
     
-    def Registrarse():
-        e1 = entry[0].get()
-        e2 = entry[1].get()
-        if manager.check_pass(e1,e2):
-            print("Permiso concebido")
-            move(SProfile,window, canvas)
+    def Registrarse(entry):
+        name = entry[0].get()
+        username = entry[1].get()
+        password = entry[2].get()
+        email = entry[3].get()
+        account = entry[4].get()[:-8]
+
+        if not username.isalpha() or not name.isalpha() or not email.isalpha():
+            messagebox.showwarning("alert", "No se permite que se utilicen nombres no alfanumericos")
         else:
-            print("Incorrecto")
-        
+
+            if registro.Registro(username,email,password, name, account):
+                variables.gloabl_acc = account
+                move(SProfile, window, canvas)
+            else:
+                messagebox.showwarning("alert", "Usuario existente")
+
     window.resizable(False, False)
     window.mainloop()

@@ -18,6 +18,11 @@ ASSETS_PATH = OUTPUT_PATH / Path("assets")
 
 lista = []
 
+def some_callback(entry):
+    entry.config(fg="black")# note that you must include the event as an arg, even if you don't use it.
+    entry.delete(0, "end")
+    return None
+
 def move(destiny,window, canvas):
     for x in lista:
         x.destroy()
@@ -89,7 +94,8 @@ def run_window(window,canvas):
     entry_1 = Entry(
         bd=0,
         bg="#F2F2F2",
-        highlightthickness=0
+        highlightthickness=0,
+        fg = "grey"
     )
     entry_1.place(
         x=49.0,
@@ -97,6 +103,10 @@ def run_window(window,canvas):
         width=262.0,
         height=32.0
     )
+    entry_1.insert(0, "Profile Name")
+
+    entry_1.bind("<Button-1>", lambda x: some_callback(entry_1))
+
 
     image_image_2 = PhotoImage(
         file=relative_to_assets("test_area.png"))
@@ -116,7 +126,8 @@ def run_window(window,canvas):
     entry_2 = Entry(
         bd=0,
         bg="#F2F2F2",
-        highlightthickness=0
+        highlightthickness=0,
+        fg = "grey"
     )
     entry_2.place(
         x=49.0,
@@ -124,6 +135,11 @@ def run_window(window,canvas):
         width=262.0,
         height=32.0
     )
+
+    entry_2.insert(0, "Age")
+
+    entry_2.bind("<Button-1>", lambda x: some_callback(entry_2))
+
 
     canvas.create_text(
         56.0,
@@ -156,6 +172,26 @@ def run_window(window,canvas):
     lista.append(button_2)
     lista.append(entry_1)
     lista.append(entry_2)
+
+    def Profile(entry):
+        name = entry[0].get()
+        username = entry[1].get()
+        password = entry[2].get()
+        email = entry[3].get()
+        account = entry[4].get()[:-8]
+
+        if not username.isalpha() or not name.isalpha() or not email.isalpha():
+            messagebox.showwarning("alert", "No se permite que se utilicen nombres no alfanumericos")
+        else:
+
+            if registro.Registro(username,email,password, name, account):
+                variables.gloabl_acc = account
+                move(SProfile, window, canvas)
+            else:
+                messagebox.showwarning("alert", "Usuario existente")
+
+
+
 
     window.mainloop()
 
