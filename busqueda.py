@@ -13,7 +13,7 @@ def busqueda_actor(actor):
         return (len(records)>0)
     
     except (Exception, psycopg2.Error) as error:
-        print("Error while fetching data from PostgreSQL", error)
+        print("\nError while fetching data from PostgreSQL", error)
 
             
             
@@ -27,7 +27,7 @@ def busqueda_genero(genero):
         return (len(records)>0)
     
     except (Exception, psycopg2.Error) as error:
-        print("Error while fetching data from PostgreSQL", error)
+        print("\nError while fetching data from PostgreSQL", error)
         
 def busqueda_pelicula(pelicula):
     try:
@@ -36,10 +36,10 @@ def busqueda_pelicula(pelicula):
         postgres_select_query = """ SELECT * FROM pelicula WHERE nombre = '%s' """
         cursor.execute(postgres_select_query % (pelicula))
         records = cursor.fetchall()
-        return (len(records)>0)
+        return (len(records)>0, records)
     
     except (Exception, psycopg2.Error) as error:
-        print("Error while fetching data from PostgreSQL", error)
+        print("\nError while fetching data from PostgreSQL", error)
         
         
 def display_pelicula_actor(actor):
@@ -81,9 +81,20 @@ def display_pelicula_genero(genero):
             print("\nNombre: ", row[0], "\nGénero: ", row[1],"\nDuracion: ", row[2], "\n")
     
     except (Exception, psycopg2.Error) as error:
-        print("Error while fetching data from PostgreSQL", error)
+        print("\nError while fetching data from PostgreSQL", error)
         
+def display_cualquiera(dato):
+    if busqueda_actor(dato):
+        display_pelicula_actor(dato)
+    elif busqueda_genero(dato):
+        display_pelicula_genero(dato)
+    elif busqueda_pelicula(dato)[0]:
+        print("\nPelicula: " + dato)
+        print("------------------------------")
+        print("\nNombre: ", busqueda_pelicula(dato)[1][0][1], "\nDuracion: ", busqueda_pelicula(dato)[1][0][3], "\n")
+    else:
+        print("\nNo se encontró el dato: " + dato + "\n")
         
-        
-display_pelicula_genero('Accion')
+
+display_cualquiera('Will')
 
