@@ -7,9 +7,10 @@ from pathlib import Path
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, messagebox
 import login as Login
 import createProfile as CProfile
+import registro
 import selectProfile as SProfile
 import signIn as Sign
 
@@ -66,7 +67,7 @@ def run_window(window,canvas):
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_2 clicked"),
+        command=lambda: Profile((entry_1,entry_2)),
         relief="flat"
     )
     button_2.place(
@@ -175,20 +176,28 @@ def run_window(window,canvas):
 
     def Profile(entry):
         name = entry[0].get()
-        username = entry[1].get()
-        password = entry[2].get()
-        email = entry[3].get()
-        account = entry[4].get()[:-8]
+        age = entry[1].get()
 
-        if not username.isalpha() or not name.isalpha() or not email.isalpha():
-            messagebox.showwarning("alert", "No se permite que se utilicen nombres no alfanumericos")
+        try:
+            int(age)
+        except:
+            messagebox.showwarning("alert", "Su edad debe ser un numero entero")
+
+        if not name.isalpha():
+            messagebox.showwarning("alert", "No se permite que se utilicen nombres no alfanumericos, o con espacios")
+        elif not isinstance(int(age),int):
+            1+1
         else:
+            registro.Profiler(name,age)
 
-            if registro.Registro(username,email,password, name, account):
-                variables.gloabl_acc = account
-                move(SProfile, window, canvas)
-            else:
-                messagebox.showwarning("alert", "Usuario existente")
+
+
+
+
+            messagebox.showinfo("Success", "Perfil creado exitosamente")
+
+            move(SProfile,window,canvas)
+
 
 
 

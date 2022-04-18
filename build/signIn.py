@@ -331,8 +331,12 @@ def run_window(window, canvas):
         email = entry[3].get()
         account = entry[4].get()[:-8]
 
-        if not username.isalpha() or not name.isalpha() or not email.isalpha():
-            messagebox.showwarning("alert", "No se permite que se utilicen nombres no alfanumericos")
+        if not username.isalpha():
+            messagebox.showwarning("alert", "Para su nombre de usuario no debe usar espacios ni caracteres no alfanumericos")
+        elif not name.replace(" ","").isalpha():
+            messagebox.showwarning("alert", "Lo que ha ingresado en su nombre no es valido")
+        elif not email.replace("@","").replace(".","").isalpha():
+            messagebox.showwarning("alert", "Lo que ha ingresado en su correo no es valido")
         else:
 
             if registro.Registro(username,email,password, name, account):
