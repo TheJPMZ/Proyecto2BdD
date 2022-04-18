@@ -181,7 +181,6 @@ def run_window(window,canvas):
     def Get(entry):
         e1 = entry[0].get()
         e2 = entry[1].get()
-        e2 = hash(e2)
         if manager.check_pass(e1,e2):
             print("Permiso concebido")
             try:

@@ -8,7 +8,7 @@ import psycopg2
 
 def conexion():
     connection = psycopg2.connect(user="postgres",
-                                    password="iamgreat",
+                                    password="C1Molina!",
                                     host="localhost",
                                     port="5432",
                                     database="Proyecto02")
@@ -59,9 +59,8 @@ def check_pass(user,pss):
             cursor.execute(postgres_select_query % user)
             total = cursor.fetchall()
             password = total[0][0]
-            if psswrd == password:
-                return True
-            else: return False
+            return psswrd == password
+
     except (Exception, psycopg2.Error) as error:
         messagebox.showerror("Error", "No se pudo conectar a la base de datos")
         print("Failed to connect to the database", error)
