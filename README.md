@@ -12,7 +12,7 @@ Nota: De momento no se crearon todas las tablas porque el dise;o se cambio a ult
 - [x] Tipos de Subscripcion
 - [x] Perfiles, Crearlos y Que se puedan usar en paralelo
 - [ ] Listas
-- - [ ] Listas de Favoritos
+- - [x] Listas de Favoritos
 - - [ ] Contenido Visto
 - - [ ] Contenido sin terminar
 - - [ ] Sugerencias

@@ -186,6 +186,19 @@ WHERE cperfil = '%s'"""),
             lista.append(self.button)
 
     def open_url(url,id):
+        try:
+            connection = pass_manager.conexion()
+            cursor = connection.cursor()
+
+            postgres_select_query = """ INSERT INTO ver(cperfil, cpelicula, duracion, fecha) VALUES ('%s','%s','%s',Now())"""
+            cursor.execute(postgres_select_query % (variables.global_this_profile[5], id, 0.5))
+            connection.commit()
+        except (Exception, psycopg2.Error) as error:
+            print("Error while fetching data from PostgreSQL", error)
+
+
+
+
         webbrowser.open(url)
         time.sleep(10)
         if variables.gloabl_acc == "Gratis":
@@ -215,7 +228,11 @@ WHERE cperfil = '%s'"""),
         image=button_image_8,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("Viendo"),
+        command=lambda: reload(window, canvas, """SELECT ver.cpelicula, nombre, pelicula.duracion, clasificacion, imagen, link, director
+FROM ver
+NATURAL JOIN perfil
+JOIN pelicula on pelicula.cpelicula = ver.cpelicula
+WHERE cperfil = '%s'"""),
         relief="flat"
     )
     button_8.place(
@@ -223,22 +240,6 @@ WHERE cperfil = '%s'"""),
         y=26.965850830078125,
         width=29.0,
         height=30.034149169921875
-    )
-
-    button_image_9 = PhotoImage(
-        file=relative_to_assets("sugg_button.png"))
-    button_9 = Button(
-        image=button_image_9,
-        borderwidth=0,
-        highlightthickness=0,
-        command=lambda: print("Sugerencias"),
-        relief="flat"
-    )
-    button_9.place(
-        x=255.0,
-        y=27.0,
-        width=28.005111694335938,
-        height=28.0738525390625
     )
 
     image_image_1 = PhotoImage(
@@ -253,7 +254,6 @@ WHERE cperfil = '%s'"""),
     lista.append(button_2)
     lista.append(button_3)
     lista.append(button_8)
-    lista.append(button_9)
     lista.append(entry_1)
 
 
