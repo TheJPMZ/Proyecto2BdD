@@ -1,6 +1,6 @@
 # Proyecto2BdD
 
-#Nota: La branch correcta para correr el programa es "temp" 
+# Nota: La branch correcta para correr el programa es "temp" 
 
 ## Correr el programa
 
