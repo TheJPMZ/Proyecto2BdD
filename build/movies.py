@@ -1,4 +1,6 @@
 import io
+
+import psycopg2
 from PIL import Image, ImageTk
 from pathlib import Path
 import time
@@ -10,6 +12,7 @@ from urllib.request import urlopen
 
 import login as Login
 import createProfile as CProfile
+import pass_manager
 import selectProfile as SProfile
 import signIn as Sign
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
@@ -24,6 +27,23 @@ ASSETS_PATH = OUTPUT_PATH / Path("assets")
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+def generateLista():
+    try:
+        connection = pass_manager.conexion()
+        cursor = connection.cursor()
+
+        codigo = """ SELECT * FROM pelicula WHERE clasificacion <= '%s'"""
+        cursor.execute(codigo % variables.global_this_profile[2])
+        peliculas = cursor.fetchall()
+
+        print(peliculas)
+        connection.commit()
+
+        return peliculas
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error while fetching data from PostgreSQL", error)
+
 
 lista = []
 
@@ -36,9 +56,12 @@ def move(destiny, window, canvas):
 
 def run_window(window, canvas, profile):
     perfil = profile
-    variables.global_this_profile = profile[5]
+    variables.global_this_profile = profile
+    print(perfil)
 
     print(profile[5])
+
+
 
     canvas.delete("all")
 
@@ -129,9 +152,53 @@ def run_window(window, canvas, profile):
     )
 
     "===========MOVIE BUTTONS================="
+    class movieButton:
+        def __init__(self,image,link,id):
+            self.name = image
+
+            self.button = Button(
+                command=lambda: open_url(str(link),id),
+                relief="flat",
+                bg="#d80b1c",
+                font=("Roboto", 28 * -1),
+                fg="#f2f2f2",
+                width=18,
+                text=self.name.upper()
+            )
+            self.button.pack(pady=5)
+
+
+
+            lista.append(self.button)
+
+    def open_url(url,id):
+        webbrowser.open(url)
+        time.sleep(10)
+        if variables.gloabl_acc == "Gratis":
+            try:
+                connection = pass_manager.conexion()
+                cursor = connection.cursor()
+                codigo = """ SELECT anuncio
+                            from pelicula
+                            NATURAL JOIN adbreak
+                            NATURAL JOIN anuncios
+                            WHERE cpelicula = '%s'"""
+                cursor.execute(codigo % id)
+                res = cursor.fetchone()[0]
+
+
+                connection.commit()
+
+
+                webbrowser.open(str(res))
+            except (Exception, psycopg2.Error) as error:
+                print("Error while fetching data from PostgreSQL", error)
+
+
+
 
     my_page = urlopen(
-        "https://m.media-amazon.com/images/M/MV5BNGJjODMxZGMtOTFlNC00MjI4LThiZWUtZTU3ZGIxYzcxMTBiXkEyXkFqcGdeQXVyODc0OTEyNDU@._V1_QL75_UY281_CR9,0,190,281_.jpg"
+        'https://m.media-amazon.com/images/M/MV5BNjY0MGEzZmQtZWMxNi00MWVhLWI4NWEtYjQ0MDkyYTJhMDU0XkEyXkFqcGdeQXVyODc0OTEyNDU@._V1_QL75_UX*_CR0,0,*_.jpg'
     )
     my_picture = io.BytesIO(my_page.read())
     pil_img = Image.open(my_picture)
@@ -142,66 +209,14 @@ def run_window(window, canvas, profile):
         image=button_image_4,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_4 clicked"),
-        relief="flat"
+        command=lambda: open_url(str(generateLista()[0][5])),
+        relief="flat",
+        width = 153.0,
+        height = 229.0
     )
     button_4.place(
-        x=21.0,
-        y=130.0,
-        width=153.0,
-        height=229.0
-    )
-
-    button_image_5 = PhotoImage(
-        file=relative_to_assets("button_5.png"))
-    button_5 = Button(
-        image=button_image_5,
-        borderwidth=0,
-        highlightthickness=0,
-        command=lambda: print("button_5 clicked"),
-        relief="flat"
-    )
-    button_5.place(
         x=185.0,
         y=130.0,
-        width=153.0,
-        height=229.0
-    )
-
-    button_image_6 = PhotoImage(
-        file=relative_to_assets("button_6.png"))
-    button_6 = Button(
-        image=button_image_6,
-        borderwidth=0,
-        highlightthickness=0,
-        command=lambda: print("button_6 clicked"),
-        relief="flat"
-    )
-    button_6.place(
-        x=21.0,
-        y=372.0,
-        width=153.0,
-        height=229.0
-    )
-
-    def open_url(url):
-        webbrowser.open(url)
-        time.sleep(10)
-        webbrowser.open("https://shattereddisk.github.io/rickroll/rickroll.mp4")
-        print("Se mostrara un anuncio")
-
-    button_image_7 = PhotoImage(
-        file=relative_to_assets("button_7.png"))
-    button_7 = Button(
-        image=button_image_7,
-        borderwidth=0,
-        highlightthickness=0,
-        command=lambda: open_url("https://www.youtube.com/watch?v=kJ2KS6s-Pck"),
-        relief="flat"
-    )
-    button_7.place(
-        x=185.0,
-        y=372.0,
         width=153.0,
         height=229.0
     )
@@ -249,13 +264,13 @@ def run_window(window, canvas, profile):
     lista.append(button_1)
     lista.append(button_2)
     lista.append(button_3)
-    lista.append(button_4)
-    lista.append(button_5)
-    lista.append(button_6)
-    lista.append(button_7)
     lista.append(button_8)
     lista.append(button_9)
     lista.append(entry_1)
+
+
+    for x in generateLista():
+        movieButton(x[1],x[5],x[0])
 
     window.resizable(False, False)
     window.mainloop()

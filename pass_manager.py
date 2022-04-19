@@ -43,9 +43,10 @@ def check_pass(user,pss):
         connection = conexion()
         cursor = connection.cursor()
 
-        postgres_select_query = """ SELECT * FROM loginLog order by codigo desc"""
+        postgres_select_query = """ SELECT * FROM loginLog order by codigo desc limit 1"""
         cursor.execute(postgres_select_query)
         res = cursor.fetchone()[0]
+        print(res)
         code = str(int(res) + 1)
 
 

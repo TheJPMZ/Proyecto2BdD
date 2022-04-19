@@ -117,6 +117,6 @@ VALUES (
 
 INSERT INTO	LOGINLOG
 (
-	CODIGO, UIngreso, PIngreso, FECHA,
+	CODIGO, UIngreso, PIngreso, FECHA
 )
 VALUES (1,'Test','Test','2022-04-18');

@@ -10,7 +10,7 @@ Nota: De momento no se crearon todas las tablas porque el dise;o se cambio a ult
 - [x] Reproduccion de videos
 - [ ] Anuncio
 - [ ] Tipos de Subscripcion
-- [ ] Perfiles, Crearlos y Que se puedan usar en paralelo
+- [x] Perfiles, Crearlos y Que se puedan usar en paralelo
 - [ ] Listas
 - - [ ] Listas de Favoritos
 - - [ ] Contenido Visto
