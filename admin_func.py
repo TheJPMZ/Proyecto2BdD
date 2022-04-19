@@ -30,7 +30,7 @@ def minutos_consum(fecha1, fecha2):
                                     FROM	VER
                                     WHERE FECHA>='%s' 
                                     AND fecha <= '%s' """
-        cursor.execute(postgres_select_query)
+        cursor.execute(postgres_select_query % (fecha1, fecha2))
         records = cursor.fetchall()
         print("\nMinutos consumidos: " + str(records[0][0]))
         
@@ -45,7 +45,20 @@ def rep_cuenta(fecha1,fecha2):
     connection = conexion()
     
 def cant_cuentas():
-    connection = conexion()
+    try:
+        connection = conexion()
+        cursor = connection.cursor()
+        postgres_select_query = """ SELECT 	COUNT(*)
+                                    FROM	USUARIO
+                                    WHERE	USUARIO.DATE >= (USUARIO.DATE - INTERVAL '6 months') 
+                                    AND USUARIO.CUENTA ILIKE 'Avanzada'"""
+        cursor.execute(postgres_select_query)
+        records = cursor.fetchall()
+        print("\nCantidad de cuentas creadas en los ultimos 6 meses: " + str(records[0][0]))
+        
+
+    except (Exception, psycopg2.Error) as error:
+        print("\nError while fetching data from PostgreSQL", error)
     
 def top10_actores():
     try:
@@ -79,8 +92,34 @@ def top10_actores():
 
 
 def top10_directores():
-    connection = conexion()
-    
+    try:
+        connection = conexion()
+        cursor = connection.cursor()
+        postgres_select_query = """ SELECT DIRECTOR, COUNT(DIRECTOR)
+                                    FROM PELICULA
+                                    INNER JOIN(	SELECT *
+                                                FROM	PERFIL
+                                                NATURAL JOIN 	USUARIO
+                                                NATURAL JOIN	VER
+                                                WHERE	CUENTA ILIKE 'Avanzada' 
+                                                OR 		CUENTA ILIKE 'Estandar') VUP_SUB 
+                                    ON VUP_SUB.CPELICULA = PELICULA.CPELICULA
+                                    GROUP BY DIRECTOR
+                                    ORDER BY DIRECTOR DESC"""
+                                    
+        cursor.execute(postgres_select_query)
+        records = cursor.fetchall()
+        print("\nTop 10 directores más vistos: ")
+        print("----------------------------------------------------")
+        for row in records:
+            print("\nDirector: " + row[0], " | Cantidad vista: " + str(row[1]))
+            
+            
+    except (Exception, psycopg2.Error) as error:
+        print("\nError while fetching data from PostgreSQL", error)   
+        
+        
+ 
 def hora_pico(fecha):
     connection = conexion()
     
@@ -88,8 +127,3 @@ def hora_pico(fecha):
 top10_generos()
 
 
-''' INSERT INTO VER(
-	cperfil, cpelicula, DURACION, FECHA)
-VALUES (
-	'Per1','P7', 45, NOW())
-; '''
