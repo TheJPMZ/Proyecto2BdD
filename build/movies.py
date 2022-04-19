@@ -27,13 +27,13 @@ ASSETS_PATH = OUTPUT_PATH / Path("assets")
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-def generateLista():
+def generateLista(querie,parametro):
     try:
         connection = pass_manager.conexion()
         cursor = connection.cursor()
 
-        codigo = """ SELECT * FROM pelicula WHERE clasificacion <= '%s'"""
-        cursor.execute(codigo % variables.global_this_profile[2])
+        codigo = querie
+        cursor.execute(codigo % parametro)
         peliculas = cursor.fetchall()
 
         print(peliculas)
@@ -53,14 +53,19 @@ def move(destiny, window, canvas):
         x.destroy()
     destiny.run_window(window, canvas)
 
+def reload(window, canvas, listapeliculas):
+    for x in lista:
+        x.destroy()
+    run_window(window, canvas, variables.global_this_profile, listapeliculas, variables.global_this_profile[5])
 
-def run_window(window, canvas, profile):
+
+def run_window(window, canvas, profile, querie = """ SELECT * FROM pelicula WHERE clasificacion <= '%s'""",parametro=""):
     perfil = profile
     variables.global_this_profile = profile
-    print(perfil)
 
-    print(profile[5])
-
+    print("Parametro: " + parametro)
+    if parametro == "":
+        parametro = variables.global_this_profile[2]
 
 
     canvas.delete("all")
@@ -109,7 +114,11 @@ def run_window(window, canvas, profile):
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("Favoritos"),
+        command=lambda: reload(window, canvas,"""SELECT cpelicula, nombre, duracion, clasificacion, imagen, link, director
+FROM favoritos
+NATURAL JOIN perfil
+NATURAL JOIN pelicula
+WHERE cperfil = '%s'"""),
         relief="flat"
     )
     button_2.place(
@@ -248,7 +257,7 @@ def run_window(window, canvas, profile):
     lista.append(entry_1)
 
 
-    for x in generateLista():
+    for x in generateLista(querie,parametro):
         movieButton(x[1],x[5],x[0])
 
     window.resizable(False, False)

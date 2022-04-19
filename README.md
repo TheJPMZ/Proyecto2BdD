@@ -6,7 +6,7 @@ Nota: De momento no se crearon todas las tablas porque el dise;o se cambio a ult
 
 - [x] Sign in
 - [x] Log in
-- [ ] Busqueda (base en los actores estrellas, director, categoría de entretenimiento, género(s), premios ganados, fecha de estreno, o el nombre específico del contenido, y cualquier parámetro adicional que se considere conveniente a criterio del desarrollador)
+- [x] Busqueda (base en los actores estrellas, director, categoría de entretenimiento, género(s), premios ganados, fecha de estreno, o el nombre específico del contenido, y cualquier parámetro adicional que se considere conveniente a criterio del desarrollador)
 - [x] Reproduccion de videos
 - [x] Anuncio
 - [x] Tipos de Subscripcion
