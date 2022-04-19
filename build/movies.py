@@ -9,7 +9,7 @@ import time
 # Explicit imports to satisfy Flake8
 from urllib.request import urlopen
 
-
+import busqueda
 import login as Login
 import createProfile as CProfile
 import pass_manager
@@ -90,7 +90,7 @@ def run_window(window, canvas, profile):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("Search"),
+        command=lambda: search(entry_1.get()),
         relief="flat"
     )
     button_1.place(
@@ -99,6 +99,9 @@ def run_window(window, canvas, profile):
         width=33.0,
         height=31.0
     )
+
+    def search(string):
+        busqueda.display_cualquiera(string)
 
     button_image_2 = PhotoImage(
         file=relative_to_assets("star_button.png"))
@@ -151,6 +154,8 @@ def run_window(window, canvas, profile):
         height=20.0
     )
 
+
+
     "===========MOVIE BUTTONS================="
     class movieButton:
         def __init__(self,image,link,id):
@@ -160,7 +165,7 @@ def run_window(window, canvas, profile):
                 command=lambda: open_url(str(link),id),
                 relief="flat",
                 bg="#d80b1c",
-                font=("Roboto", 28 * -1),
+                font=("Roboto", 20 * -1),
                 fg="#f2f2f2",
                 width=18,
                 text=self.name.upper()
@@ -194,32 +199,6 @@ def run_window(window, canvas, profile):
             except (Exception, psycopg2.Error) as error:
                 print("Error while fetching data from PostgreSQL", error)
 
-
-
-
-    my_page = urlopen(
-        'https://m.media-amazon.com/images/M/MV5BNjY0MGEzZmQtZWMxNi00MWVhLWI4NWEtYjQ0MDkyYTJhMDU0XkEyXkFqcGdeQXVyODc0OTEyNDU@._V1_QL75_UX*_CR0,0,*_.jpg'
-    )
-    my_picture = io.BytesIO(my_page.read())
-    pil_img = Image.open(my_picture)
-    button_image_4 = ImageTk.PhotoImage(
-        pil_img
-    )
-    button_4 = Button(
-        image=button_image_4,
-        borderwidth=0,
-        highlightthickness=0,
-        command=lambda: open_url(str(generateLista()[0][5])),
-        relief="flat",
-        width = 153.0,
-        height = 229.0
-    )
-    button_4.place(
-        x=185.0,
-        y=130.0,
-        width=153.0,
-        height=229.0
-    )
 
     button_image_8 = PhotoImage(
         file=relative_to_assets("clock_button.png"))

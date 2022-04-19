@@ -8,8 +8,8 @@ Nota: De momento no se crearon todas las tablas porque el dise;o se cambio a ult
 - [x] Log in
 - [ ] Busqueda (base en los actores estrellas, director, categoría de entretenimiento, género(s), premios ganados, fecha de estreno, o el nombre específico del contenido, y cualquier parámetro adicional que se considere conveniente a criterio del desarrollador)
 - [x] Reproduccion de videos
-- [ ] Anuncio
-- [ ] Tipos de Subscripcion
+- [x] Anuncio
+- [x] Tipos de Subscripcion
 - [x] Perfiles, Crearlos y Que se puedan usar en paralelo
 - [ ] Listas
 - - [ ] Listas de Favoritos

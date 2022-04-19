@@ -7,7 +7,7 @@ def busqueda_actor(actor):
     try:
         connection = conexion()
         cursor = connection.cursor()
-        postgres_select_query = """ SELECT * FROM actor WHERE nombre = '%s' """
+        postgres_select_query = """ SELECT * FROM actor WHERE nombre ILIKE '%s' """
         cursor.execute(postgres_select_query % (actor))
         records = cursor.fetchall()
         return (len(records)>0)
@@ -21,7 +21,7 @@ def busqueda_genero(genero):
     try:
         connection = conexion()
         cursor = connection.cursor()
-        postgres_select_query = """ SELECT * FROM genero WHERE nombre_genero = '%s' """
+        postgres_select_query = """ SELECT * FROM genero WHERE genero ILIKE '%s' """
         cursor.execute(postgres_select_query % (genero))
         records = cursor.fetchall()
         return (len(records)>0)
@@ -35,7 +35,7 @@ def busqueda_pelicula(pelicula):
     try:
         connection = conexion()
         cursor = connection.cursor()
-        postgres_select_query = """ SELECT * FROM pelicula WHERE nombre = '%s' """
+        postgres_select_query = """ SELECT * FROM pelicula WHERE nombre ILIKE '%s' """
         cursor.execute(postgres_select_query % (pelicula))
         records = cursor.fetchall()
         return (len(records)>0, records)
@@ -69,11 +69,10 @@ def display_pelicula_genero(genero):
     try:
         connection = conexion()
         cursor = connection.cursor()
-        postgres_select_query = """ SELECT 	NOMBRE,G_REQUEST.NOMBRE_GENERO ,DURACION
-                                    FROM	PELICULA
-                                    INNER JOIN (SELECT 	CODIGO,	NOMBRE_GENERO
-                                                FROM	GENERO
-                                                WHERE	NOMBRE_GENERO ILIKE '%s') G_REQUEST ON G_REQUEST.CODIGO = PELICULA.GENERO"""
+        postgres_select_query = """ SELECT nombre, genero, duracion
+                                    FROM GENERO
+                                    NATURAL JOIN PELICULA
+                                    WHERE genero ILIKE '%s'"""
         cursor.execute(postgres_select_query % (genero))
         records = cursor.fetchall()
         print("\nPeliculas del genero: " + genero)
