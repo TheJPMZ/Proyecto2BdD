@@ -11,16 +11,15 @@ Nota: De momento no se crearon todas las tablas porque el dise;o se cambio a ult
 - [x] Anuncio
 - [x] Tipos de Subscripcion
 - [x] Perfiles, Crearlos y Que se puedan usar en paralelo
-- [ ] Listas
+- [x] Listas
 - - [x] Listas de Favoritos
-- - [ ] Contenido Visto
-- - [ ] Contenido sin terminar
-- - [ ] Sugerencias
+- - [x] Contenido Visto
+- - [x] Sugerencias
 - [ ] Downgrade
-- [ ] Cuenta Administradora
-- - [ ] Que pude agregar y quitar contenido (Agregar, modificar o dar de baja contenido, por ejemplo, eliminar una película, corregir el nombre de un actor, o añadir un nuevo documental y toda la información de este: duración, director, tema, etc.)
-- - [ ] Editar y Borrar cuentas
-- - [ ] Agregar, modificar o eliminar anunciantes y su contenido a promocionar.
+- [x] Cuenta Administradora
+- - [x] Que pude agregar y quitar contenido (Agregar, modificar o dar de baja contenido, por ejemplo, eliminar una película, corregir el nombre de un actor, o añadir un nuevo documental y toda la información de este: duración, director, tema, etc.)
+- - [x] Editar y Borrar cuentas
+- - [x] Agregar, modificar o eliminar anunciantes y su contenido a promocionar.
 - [x] Seguridad
 - - [x] Hashear
 - - [x] Validar entradas
