@@ -14,6 +14,7 @@ import signIn as Sign
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, messagebox
 import pass_manager as manager
 import variables
+import admin_func as admin
 
 def some_callback(entry):
     entry.config(fg="black")# note that you must include the event as an arg, even if you don't use it.
@@ -195,7 +196,7 @@ def run_window(window,canvas):
                 tipo_cuenta = records[0][4]
                 profiles = 0
                 if tipo_cuenta == 'Admin':
-                    print("Soy Admin")
+                    admin.mainloop()
                 elif tipo_cuenta == 'Avanzada':
                     profiles = 8
                 elif tipo_cuenta == 'Premium':

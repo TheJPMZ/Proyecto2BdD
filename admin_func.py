@@ -124,6 +124,30 @@ def hora_pico(fecha):
     connection = conexion()
     
 
-top10_generos()
 
-
+def mainloop():
+    opcion = ''
+    fecha1 = ''
+    fecha2 = ''
+    while opcion != '8':
+        print("MENU:")
+        print("1. Top 10 generos vistos")
+        print("2. Minutos consumidos")
+        print("3. Cantidad de cuentas creadas en los ultimos 6 meses")
+        print("4. Top 10 actores más vistos")
+        print("5. Top 10 directores más vistos")
+        opcion = input("\nIngrese una opcion: ")
+        
+    if opcion == '1':
+        top10_generos()
+    elif opcion == '2':
+        fecha1 = input("Ingrese la fecha inicial (YYYY-MM-DD): ")
+        fecha2 = input("Ingrese la fecha final (YYYY-MM-DD): ")
+        minutos_consum(fecha1, fecha2)
+    elif opcion == '3':
+        cant_cuentas()
+    elif opcion == '4':
+        top10_actores()
+    elif opcion == '5':
+        top10_directores()
+    else: print('Opcion invalida')
