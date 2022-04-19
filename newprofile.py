@@ -18,7 +18,7 @@ def Profile(username, email, password, name, account):
             res = ''.join('U' + str(int(res) + 1))
 
             postgres_select_query = """ INSERT INTO usuario(cusuario, username, nombre, password, email, cuenta) VALUES ('%s','%s','%s','%s','%s','%s')"""
-            cursor.execute(postgres_select_query % (res, username, name, password, email, account))
+            cursor.execute(postgres_select_query % (res, username, name, hash(password), email, account))
 
             connection.commit()
             return True
