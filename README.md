@@ -2,30 +2,11 @@
 
 Nota: De momento no se crearon todas las tablas porque el dise;o se cambio a ultima hora en la revision
 
-## Todo list
+## Recomendaciones
+Es necesario tener python3 actualizado y correrlo desde consola
 
-- [x] Sign in
-- [x] Log in
-- [x] Busqueda (base en los actores estrellas, director, categoría de entretenimiento, género(s), premios ganados, fecha de estreno, o el nombre específico del contenido, y cualquier parámetro adicional que se considere conveniente a criterio del desarrollador)
-- [x] Reproduccion de videos
-- [x] Anuncio
-- [x] Tipos de Subscripcion
-- [x] Perfiles, Crearlos y Que se puedan usar en paralelo
-- [ ] Listas
-- - [x] Listas de Favoritos
-- - [ ] Contenido Visto
-- - [ ] Contenido sin terminar
-- - [ ] Sugerencias
-- [ ] Downgrade
-- [ ] Cuenta Administradora
-- - [ ] Que pude agregar y quitar contenido (Agregar, modificar o dar de baja contenido, por ejemplo, eliminar una película, corregir el nombre de un actor, o añadir un nuevo documental y toda la información de este: duración, director, tema, etc.)
-- - [ ] Editar y Borrar cuentas
-- - [ ] Agregar, modificar o eliminar anunciantes y su contenido a promocionar.
-- [x] Seguridad
-- - [x] Hashear
-- - [x] Validar entradas
-- - [x] Registro de intentos fallidos
-
+Para los requerimientos ```pip install requirements.txt```
+Para correr el archivo ```py main.py```
 
 
 ## Diagrama Entidad Relacion
