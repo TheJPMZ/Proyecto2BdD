@@ -195,11 +195,13 @@ def run_window(window,canvas):
                 records = cursor.fetchall()
                 tipo_cuenta = records[0][4]
                 profiles = 0
+                messagebox.showwarning("alert", tipo_cuenta)
                 if tipo_cuenta == 'Admin':
                     admin.mainloop()
+                    messagebox.showinfo("Admin", "Welcome Admin")
                 elif tipo_cuenta == 'Avanzada':
                     profiles = 8
-                elif tipo_cuenta == 'Premium':
+                elif tipo_cuenta == 'Estandar':
                     profiles = 4
                 elif tipo_cuenta == 'Gratis' :
                     profiles = 1
@@ -207,6 +209,7 @@ def run_window(window,canvas):
                 while len(records) > profiles:
                     records.pop()
 
+                variables.global_max_profiles = profiles
                 variables.global_user = records[0][0]
                 variables.global_profiles = records
             except (Exception, psycopg2.Error) as error:

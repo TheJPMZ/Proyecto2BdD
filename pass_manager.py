@@ -8,7 +8,7 @@ import psycopg2
 
 def conexion():
     connection = psycopg2.connect(user="postgres",
-                                    password="C1Molina!",
+                                    password="iamgreat",
                                     host="localhost",
                                     port="5432",
                                     database="Proyecto02")
@@ -46,7 +46,6 @@ def check_pass(user,pss):
         postgres_select_query = """ SELECT * FROM loginLog order by codigo desc limit 1"""
         cursor.execute(postgres_select_query)
         res = cursor.fetchone()[0]
-        print(res)
         code = str(int(res) + 1)
 
 

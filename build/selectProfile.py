@@ -21,6 +21,9 @@ def move(destiny, window, canvas):
         x.destroy()
     for x in buttons:
         x.delete()
+    list = window.pack_slaves() #Code from stackoverflow
+    for l in list:
+        l.destroy()
     destiny.run_window(window, canvas)
 
 def enter(destiny, window, canvas, profile):
@@ -52,7 +55,7 @@ def run_window(window, canvas, args=[]):
         height=55.0
     )
 
-    button_image_2 = PhotoImage(    
+    button_image_2 = PhotoImage(
         file=relative_to_assets("add_profile_button.png"))
     button_2 = Button(
         image=button_image_2,
@@ -96,7 +99,8 @@ def run_window(window, canvas, args=[]):
     for x in profiles:
         buttons.append(profilebutton(x))
 
-    button_2.pack(pady=10)
+    if len(profiles) < variables.global_max_profiles:
+        button_2.pack(pady=10)
 
     lista.append(title)
     lista.append(button_1)

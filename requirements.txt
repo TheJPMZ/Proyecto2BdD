@@ -3,3 +3,4 @@ tkinter
 pathlib
 webbrowser
 time
+hash

@@ -70,6 +70,12 @@ def run_window(window, canvas, profile, querie = """ SELECT * FROM pelicula WHER
 
     canvas.delete("all")
 
+    def clear():
+        list = window.grid_slaves()
+        for l in list:
+            l.destroy()
+    clear()
+
     canvas = Canvas(
         window,
         bg="#050840",
@@ -167,7 +173,7 @@ WHERE cperfil = '%s'"""),
 
     "===========MOVIE BUTTONS================="
     class movieButton:
-        def __init__(self,image,link,id):
+        def __init__(self,image,link,id,coords):
             self.name = image
 
             self.button = Button(
@@ -176,10 +182,13 @@ WHERE cperfil = '%s'"""),
                 bg="#d80b1c",
                 font=("Roboto", 20 * -1),
                 fg="#f2f2f2",
-                width=18,
+                width= 20,
                 text=self.name.upper()
             )
-            self.button.pack(pady=5)
+            self.button.place(
+                x = 65,
+                y = coords
+            )
 
 
 
@@ -194,14 +203,12 @@ WHERE cperfil = '%s'"""),
             cursor.execute(postgres_select_query % (variables.global_this_profile[5], id, 0.5))
             connection.commit()
         except (Exception, psycopg2.Error) as error:
-            print("Error while fetching data from PostgreSQL", error)
-
-
-
+            print("Error al ingresar datos a la tabla ver", error)
 
         webbrowser.open(url)
         time.sleep(10)
-        if variables.gloabl_acc == "Gratis":
+
+        if variables.global_this_profile[4] == "Gratis":
             try:
                 connection = pass_manager.conexion()
                 cursor = connection.cursor()
@@ -256,9 +263,12 @@ WHERE cperfil = '%s'"""),
     lista.append(button_8)
     lista.append(entry_1)
 
+    coordenadas = 150
 
-    for x in generateLista(querie,parametro):
-        movieButton(x[1],x[5],x[0])
+
+    for x,y in enumerate(generateLista(querie,parametro)):
+        movieButton(y[1],y[5],y[0],coordenadas)
+        coordenadas += 50
 
     window.resizable(False, False)
     window.mainloop()

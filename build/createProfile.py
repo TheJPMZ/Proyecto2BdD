@@ -179,9 +179,10 @@ def run_window(window,canvas):
         age = entry[1].get()
 
         try:
-            int(age)
+            if int(age) > 100:
+                raise ValueError
         except:
-            messagebox.showwarning("alert", "Su edad debe ser un numero entero")
+            messagebox.showwarning("alert", "Su edad debe ser un numero entero menor a dos digitos")
 
         if not name.isalpha():
             messagebox.showwarning("alert", "No se permite que se utilicen nombres no alfanumericos, o con espacios")

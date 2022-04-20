@@ -20,8 +20,11 @@ def Registro(username,email,password, name, account):
             res = res.split('U')[1]
             
             res = ''.join('U' + str(int(res)+1))
-            
-            
+
+            print(password)
+            password = hash.hash(password)
+            print(password)
+
             postgres_select_query = """ INSERT INTO usuario(cusuario, username, nombre, password, email, cuenta, date) VALUES ('%s','%s','%s','%s','%s','%s',Now())"""
             cursor.execute(postgres_select_query % (res,username,name,password,email,account))
             

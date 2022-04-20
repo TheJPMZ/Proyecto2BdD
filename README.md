@@ -1,13 +1,20 @@
 # Proyecto2BdD
 
-Nota: De momento no se crearon todas las tablas porque el dise;o se cambio a ultima hora en la revision
+Este es un proyecto con el objetivo de simular una aplicacion para peliculas
 
-## Correr el programa
+_Se repararon problemas y optimizaron funciones gracias a error al hacerle merge a las branches, el profesor esta enterado._
+
+## Como correr el programa
 
 Es necesario tener python3 actualizado y correrlo desde consola
 
-Para los requerimientos ```pip install requirements.txt```
-Para correr el archivo ```py main.py```
+ 1. ```$ pip install requirements.txt```
+ 2. Se deben correr los archivos dentro de **Queries** en una tabla en sql
+ 3. Dentro de `pass_manager.py` se deben ingresar los datos de acceso de sql
+ 4. Correr ```$ py main.py``` desde la consola*
+
+*Si no se corre desde consola es necesario modificar con la siguiente variable del sistema: 
+`PYTHONHASHSEED=0`
 
 
 ## Diagrama Entidad Relacion

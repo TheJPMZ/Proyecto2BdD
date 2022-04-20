@@ -72,9 +72,9 @@ VALUES (
 INSERT INTO usuario(
 	cusuario, username, nombre, password, email, cuenta)
 VALUES (
-	'U1','egirl21','Jorge Escopetas','5c7149bf161be854ee758c49aa5b2ad466ad656571dc0527660c07fcf381c493','escopeteando@gmail.com','Avanzada') , (
-	'U2','jpmz','Jose Monzon','2f6c46d7790bdad37504095e613b1c852f5888308e2b6ec4bc2d8e9481ee2eff','mon20309@uvg.edu.gt','Admin') , (
-	'U3','cayomol','Cayetano Moina','522fa1a6b36eb4500e5cd08aaf8150e50005390c3307940f0c9fc8c4c983fd1e','mol20211@uvg.edu.gt','Admin') 
+	'U1','egirl21','Jorge Escopetas','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4','escopeteando@gmail.com','Avanzada') , (
+	'U2','jpmz','Jose Monzon','a28a9ca63e8460b03dff84b5645c6c2a30f48149c0e5b273525cf4b80fe8a8ca','mon20309@uvg.edu.gt','Admin') , (
+	'U3','cayomol','Cayetano Moina','bd3dae5fb91f88a4f0978222dfd58f59a124257cb081486387cbae9df11fb879','mol20211@uvg.edu.gt','Admin')
 ;
 
 INSERT INTO perfil(
@@ -84,7 +84,7 @@ VALUES (
 	'Per2','U1',2,'Kenny [15]',15) , (
 	'Per3','U1',3,'Mabel [10]',10) , (
 	'Per4','U1',4,'Anita [6]',6) , (
-	'Per5','U1',5,'Deadsoon[99]',99) 
+	'Per5','U2',5,'Deadsoon[99]',99) 
 ;
 
 INSERT INTO anuncios(
