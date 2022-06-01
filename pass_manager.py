@@ -12,7 +12,10 @@ def conexion():
                                     host="localhost",
                                     port="5432",
                                     database="Proyecto02")
+    
     return connection
+
+
 
 
 

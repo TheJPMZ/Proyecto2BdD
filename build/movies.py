@@ -199,7 +199,7 @@ WHERE cperfil = '%s'"""),
             connection = pass_manager.conexion()
             cursor = connection.cursor()
 
-            postgres_select_query = """ INSERT INTO ver(cperfil, cpelicula, duracion, fecha) VALUES ('%s','%s','%s',Now())"""
+            postgres_select_query = """ INSERT INTO ver(cperfil, cpelicula, duracion, fecha, timestmp) VALUES ('%s','%s','%s',Now(),Now())"""
             cursor.execute(postgres_select_query % (variables.global_this_profile[5], id, 0.5))
             connection.commit()
         except (Exception, psycopg2.Error) as error:
