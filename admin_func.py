@@ -153,9 +153,28 @@ def top10_directores():
             
             
     except (Exception, psycopg2.Error) as error:
-        print("\nError while fetching data from PostgreSQL", error)   
-    
-
+        print("\nError while fetching data from PostgreSQL", error) 
+        
+        
+def top10_busqueda():
+    try:
+        connection = conexion()
+        cursor = connection.cursor()
+        postgres_select_query = """ SELECT DATO, COUNT(DATO) AS VECES_BUSCADO
+                                    FROM BUSQUEDA
+                                    GROUP BY DATO
+                                    LIMIT 10"""
+                                    
+        cursor.execute(postgres_select_query)
+        records = cursor.fetchall()
+        print("\nTop 10 busquedas más hechas: ")
+        print("----------------------------------------------------")
+        for row in records:
+            print("\nBusqueda: " + row[0], " | Cantidad: " + str(row[1]))
+    except (Exception, psycopg2.Error) as error:
+        print("\nError while fetching data from PostgreSQL", error) 
+        
+      
     
 def agregar_anunciante(canuncio, anuncio,anunciante):
     try:
@@ -392,8 +411,9 @@ def mainloop():
         print("5. Cantidad de cuentas creadas en los ultimos 6 meses")
         print("6. Top 10 actores más vistos")
         print("7. Top 10 directores más vistos")
-        print("8. Alterar registros")
-        print("9. Salir")
+        print("8. Top 10 busquedas")
+        print(". Alterar registros")
+        print(". Salir")
         opcion = input("\nIngrese una opcion: ")
         
         if opcion == '1':
@@ -417,8 +437,10 @@ def mainloop():
         elif opcion == '7':
             top10_directores()
         elif opcion == '8':
+            top10_busqueda()
+        elif opcion == '':
             alterar_registros()
-        elif opcion == '9':
+        elif opcion == '':
             print("\nSaliendo...")
             
         else: print('Opcion invalida')
