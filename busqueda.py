@@ -83,6 +83,18 @@ def display_pelicula_genero(genero):
     
     except (Exception, psycopg2.Error) as error:
         print("\nError while fetching data from PostgreSQL", error)
+        
+        
+def agregar_busqueda(dato):
+    try:
+        connection = conexion()
+        cursor = connection.cursor()
+        postgres_select_query = """ INSERT INTO busqueda (DATO,FECHA) VALUES ('%s',NOW()) """
+        cursor.execute(postgres_select_query % (dato))
+        print("\nSe ha agregado la busqueda con éxito: " + dato)
+        connection.commit()
+    except (Exception, psycopg2.Error) as error:
+        print("\nError while fetching data from PostgreSQL", error)
       
 #Muestra todas las peliculas relacionadas con un dato dado, este puede ser un actor, un genero o una pelicula  
 def display_cualquiera(dato):
@@ -96,6 +108,7 @@ def display_cualquiera(dato):
         print("\nNombre: ", busqueda_pelicula(dato)[1][0][1], "\nDuracion: ", busqueda_pelicula(dato)[1][0][3], "\n")
     else:
         print("\nNo se encontró el dato: " + dato + "\n")
+    agregar_busqueda(dato)
         
 
 

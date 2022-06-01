@@ -96,3 +96,62 @@ CREATE TABLE	LOGINLOG
 	PRIMARY KEY	(CODIGO)
 );
 
+CREATE TABLE BUSQUEDA(
+	ID 		 	SERIAL,
+	DATO 		TEXT,
+	FECHA 		DATE,
+	PRIMARY KEY(ID)	
+);
+
+CREATE TABLE HISTORY_MOD (
+	ID         	SERIAL,
+	TSTAMP   	TIMESTAMP	DEFAULT now(),
+	SCHEMANAME 	TEXT,
+	TABNAME    	TEXT,
+	OPERATION	TEXT,
+	WHO			TEXT	DEFAULT current_user
+);
+
+DROP TABLE if exists d_date;
+
+CREATE TABLE d_date
+(
+  date_dim_id              INT NOT NULL,
+  date_actual              DATE NOT NULL,
+  epoch                    BIGINT NOT NULL,
+  day_suffix               VARCHAR(4) NOT NULL,
+  day_name                 VARCHAR(10) NOT NULL,
+  day_of_week              INT NOT NULL,
+  day_of_month             INT NOT NULL,
+  day_of_quarter           INT NOT NULL,
+  day_of_year              INT NOT NULL,
+  week_of_month            INT NOT NULL,
+  week_of_year             INT NOT NULL,
+  week_of_year_iso         CHAR(10) NOT NULL,
+  month_actual             INT NOT NULL,
+  month_name               VARCHAR(10) NOT NULL,
+  month_name_abbreviated   CHAR(3) NOT NULL,
+  quarter_actual           INT NOT NULL,
+  quarter_name             VARCHAR(10) NOT NULL,
+  year_actual              INT NOT NULL,
+  first_day_of_week        DATE NOT NULL,
+  last_day_of_week         DATE NOT NULL,
+  first_day_of_month       DATE NOT NULL,
+  last_day_of_month        DATE NOT NULL,
+  first_day_of_quarter     DATE NOT NULL,
+  last_day_of_quarter      DATE NOT NULL,
+  first_day_of_year        DATE NOT NULL,
+  last_day_of_year         DATE NOT NULL,
+  mmyyyy                   CHAR(6) NOT NULL,
+  mmddyyyy                 CHAR(10) NOT NULL,
+  weekend_indr             BOOLEAN NOT NULL
+);
+
+ALTER TABLE public.d_date ADD CONSTRAINT d_date_date_dim_id_pk PRIMARY KEY (date_dim_id);
+
+CREATE INDEX d_date_date_actual_idx
+  ON d_date(date_actual);
+
+COMMIT;
+
+
