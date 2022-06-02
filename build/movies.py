@@ -1,20 +1,8 @@
-import io
-
 import psycopg2
-from PIL import Image, ImageTk
 from pathlib import Path
 import time
-
-# from tkinter import *
-# Explicit imports to satisfy Flake8
-from urllib.request import urlopen
-
 import busqueda
-import login as Login
-import createProfile as CProfile
 import pass_manager
-import selectProfile as SProfile
-import signIn as Sign
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 import webbrowser
 
