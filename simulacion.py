@@ -15,38 +15,118 @@ def executequery(p_cursor, p_query, parameters=None):
         exit()
     return p_cursor
 
-connection = conexion()
-cursor = connection.cursor()
 
-query1 = """SELECT cperfil FROM Perfil"""
+def simulate(p_querystring):
+    connection = conexion()
+    cursor = connection.cursor()
 
-executequery(cursor, query1)
-result = cursor.fetchall()
+    query1 = """SELECT cperfil FROM Perfil"""
 
-profile = random.choice(result)
+    executequery(cursor, query1)
+    result = cursor.fetchall()
 
-query2 = """SELECT cpelicula FROM Pelicula"""
+    profile = random.choice(result)
 
-executequery(cursor, query2)
-result = cursor.fetchall()
+    query2 = """SELECT cpelicula FROM Pelicula"""
 
-movie = random.choice(result)
+    executequery(cursor, query2)
+    result = cursor.fetchall()
 
-query3 = """SELECT duracion FROM Pelicula WHERE cpelicula = '%s'"""
+    movie = random.choice(result)
 
-executequery(cursor,query3,movie[0])
-result = cursor.fetchall()
+    query3 = """SELECT duracion FROM Pelicula WHERE cpelicula = '%s'"""
 
-duration = result[0]
+    executequery(cursor, query3, movie[0])
+    result = cursor.fetchall()
 
-if random.randint(0,1):
-    duration = int(duration[0])
-else:
-    duration = random.randint(0,*duration)
+    duration = result[0]
 
-insert_query = """INSERT INTO ver (cperfil, cpelicula, duracion, fecha, timestmp) VALUES ('%s','%s','%s',Now(),Now())"""
+    if random.randint(0, 1):
+        duration = int(duration[0])
+    else:
+        duration = random.randint(0, *duration)
 
-executequery(cursor,insert_query,(*profile,*movie,duration))
+    insert_query = """INSERT INTO ver (cperfil, cpelicula, duracion, fecha, timestmp) VALUES ('%s','%s','%s',%s,%s)"""
 
-connection.commit()
+    executequery(cursor, insert_query, (*profile, *movie, duration, p_querystring, p_querystring))
 
+    connection.commit()
+    cursor.close()
+    connection.close()
+
+
+def simulation_menu():
+    year, month, day = str(datetime.date.today()).split("-")
+
+    class DayError:
+        pass
+
+    try:
+        new_year = int(input("Enter the year: "))
+        new_month = int(input("Enter the number of the month: "))
+        new_day = int(input("Enter the number of the day: "))
+
+        1 / new_year * new_month * new_day
+
+        if new_year <= 0 or new_month <= 0 or new_day <= 0:
+            raise ZeroDivisionError
+
+        if new_month > 12:
+            raise StopIteration
+
+        if new_day > 31:
+            raise DayError
+        elif new_month == 2 and new_day > 28:
+            raise DayError
+        elif new_month in [4, 6, 9, 11] and new_day > 31:
+            raise DayError
+
+    except ValueError:
+        print("Ingresar solamente numeros enteros")
+    except ZeroDivisionError:
+        print("No se permiten numeros menores o iguales a 0")
+    except StopIteration:
+        print("Los meses deben ser menores a 12")
+    except DayError:
+        print("Hubo un error en el dia")
+    else:
+
+        try:
+            repeats = int(input("Numero de datos a generar: "))
+
+            for x in range(0, repeats):
+                year_interval = new_year - int(year)
+                month_interval = new_month - int(month)
+                day_interval = new_day - int(day)
+                hour_interval = random.randint(-20, 2)
+                minute_interval = random.randint(0, 59)
+                seconds_interval = random.randint(0, 59)
+
+                querystring = f"NOW() + INTERVAL '{year_interval} years {month_interval} months {day_interval} days {hour_interval} hours {minute_interval} minutes {seconds_interval} seconds' "
+
+                print(x * 100 / repeats, "%", end="\r")
+
+                simulate(querystring)
+
+            print("Done!!")
+        except Exception:
+            print("Ese no es un numero valido")
+
+
+def simulate2():
+    for daya in range(0, 60):
+        for x in range(0, 750):
+            year_interval = 0
+            month_interval = 0
+            day_interval = daya
+            hour_interval = random.randint(-20, 2)
+            minute_interval = random.randint(0, 59)
+            seconds_interval = random.randint(0, 59)
+
+            querystring = f"NOW() + INTERVAL '{year_interval} years {month_interval} months {day_interval} days {hour_interval} hours {minute_interval} minutes {seconds_interval} seconds'"
+
+            print((((x * 100) / 750) * daya) / 60, "%", end="\r")
+
+            simulate(querystring)
+
+    print("Done!!")
