@@ -30,11 +30,6 @@ def check_user(user):
     except (Exception, psycopg2.Error) as error:
         print("Failed to connect to the database", error)
 
-    finally:
-        # closing database connection.
-        if connection:
-            cursor.close()
-            connection.close()
 
 
 def check_pass(user,pss):
@@ -54,9 +49,6 @@ def check_pass(user,pss):
         connection.commit()
 
         if (check_user(user)):
-
-
-
             postgres_select_query = """ SELECT password FROM usuario WHERE username = '%s'"""
             cursor.execute(postgres_select_query % user)
             total = cursor.fetchall()

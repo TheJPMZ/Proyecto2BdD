@@ -1,4 +1,3 @@
-from multiprocessing import connection
 from pass_manager import conexion
 import psycopg2
 
@@ -55,7 +54,7 @@ def rep_categoria(fecha1, fecha2):
         print("\nReproducciones por categoria: ")
         print("----------------------------------------------------\n")
         for row in records:
-            print("Categoria: " + row[0], " | Reproducciones: " + str(row[1]))        
+            print("Categoria: " + row[0], " | Reproducciones: " + str(row[1]))
 
     except (Exception, psycopg2.Error) as error:
         print("\nError while fetching data from PostgreSQL", error)
@@ -76,7 +75,7 @@ def rep_cuenta(fecha1,fecha2):
         print("\nReproducciones por cuenta: ")
         print("----------------------------------------------------\n")
         for row in records:
-            print("Cuenta: " + row[0], " | Reproducciones: " + str(row[1]))        
+            print("Cuenta: " + row[0], " | Reproducciones: " + str(row[1]))
 
     except (Exception, psycopg2.Error) as error:
         print("\nError while fetching data from PostgreSQL", error)
@@ -153,37 +152,54 @@ def top10_directores():
             
             
     except (Exception, psycopg2.Error) as error:
-        print("\nError while fetching data from PostgreSQL", error)   
-    
+        print("\nError while fetching data from PostgreSQL", error)
 
-    
+
+def top10_busqueda():
+    try:
+        connection = conexion()
+        cursor = connection.cursor()
+        postgres_select_query = """ SELECT *
+                                    FROM TOP10BUSQUEDA"""
+
+        cursor.execute(postgres_select_query)
+        records = cursor.fetchall()
+        print("\nTop 10 busquedas más hechas: ")
+        print("----------------------------------------------------")
+        for row in records:
+            print("\nBusqueda: " + row[0], " | Cantidad: " + str(row[1]))
+    except (Exception, psycopg2.Error) as error:
+        print("\nError while fetching data from PostgreSQL", error)
+
+
+
 def agregar_anunciante(canuncio, anuncio,anunciante):
     try:
         connection = conexion()
         cursor = connection.cursor()
         postgres_select_query = """ INSERT INTO anuncios(canuncio, anuncio, anunciante)
                                     VALUES ('%s','%s','%s')"""
-                                    
+
         cursor.execute(postgres_select_query % (canuncio, anuncio,anunciante))
         connection.commit()
         print("\nAnunciante agregado con exito")
     except (Exception, psycopg2.Error) as error:
         print("\nError while fetching data from PostgreSQL", error)
-        
+
 def agregar_pelicula(cpelicula, nombre, duracion, clasificacion, imagen, link, director):
     try:
         connection = conexion()
         cursor = connection.cursor()
         postgres_select_query = """ INSERT INTO PELICULA(cpelicula, nombre, duracion, clasificacion, imagen, link, director)
                                     VALUES ('%s','%s','%f','%d','%s','%s','%s')"""
-                                    
+
         cursor.execute(postgres_select_query % (cpelicula, nombre, duracion, clasificacion, imagen, link, director))
         connection.commit()
         print("\nPelicula agregada con exito")
     except (Exception, psycopg2.Error) as error:
         print("\nError while fetching data from PostgreSQL", error)
-        
-        
+
+
 def agregar():
     opcion1 = ''
     print("\nMENU DE AGREGAR:")
@@ -209,47 +225,47 @@ def agregar():
         print("\nVOLVIENDO...")
     else:
         print("\nOpcion invalida")
-        
+
 def modificar_pelicula(columna, newvalue, cpelicula):
     try:
         connection = conexion()
         cursor = connection.cursor()
-        
+
         postgres_select_query = """UPDATE PELICULA
                                     SET %s = '%s'
                                     WHERE cpelicula = '%s'"""
-                                    
+
         cursor.execute(postgres_select_query % (columna,newvalue,cpelicula))
         connection.commit()
         print("\nPeliculada cambiada con exito")
     except (Exception, psycopg2.Error) as error:
         print("\nError while fetching data from PostgreSQL", error)
-        
+
 
 def modificar_anunciante(columna, newvalue,canuncio):
     try:
         connection = conexion()
         cursor = connection.cursor()
-        
+
         postgres_select_query = """UPDATE ANUNCIO
                                     SET %s = '%s'
                                     WHERE canunciante = '%s'"""
-                                    
+
         cursor.execute(postgres_select_query % (columna,newvalue,canuncio))
         connection.commit()
         print("\nPeliculada cambiada con exito")
     except (Exception, psycopg2.Error) as error:
         print("\nError while fetching data from PostgreSQL", error)
-        
+
 def modificar_usuario(columna, newvalue,cusuario):
     try:
         connection = conexion()
         cursor = connection.cursor()
-        
+
         postgres_select_query = """UPDATE USUARIO
                                     SET %s = '%s'
                                     WHERE cusuario = '%s'"""
-                                    
+
         cursor.execute(postgres_select_query % (columna,newvalue,cusuario))
         connection.commit()
         print("\nPeliculada cambiada con exito")
@@ -270,14 +286,14 @@ def modificar():
         cusuario = input("\nIngrese el codigo del usuario para modificar: ")
         newvalue = input("\nIngrese el nuevo valor: ")
         modificar_usuario(columna, newvalue,cusuario)
-        
+
     elif opcion1 == '2':
         columna =  input("\nIngrese la columna a modificar: ")
         canuncio = input("\nIngrese el codigo del anuncio para modificar: ")
         newvalue = input("\nIngrese el nuevo valor: ")
         modificar_anunciante(columna, newvalue,canuncio)
 
-    
+
     elif opcion1 == '3':
         columna =  input("\nIngrese la columna a modificar: ")
         cpelicula = input("\nIngrese el codigo del anuncio para modificar: ")
@@ -293,10 +309,10 @@ def eliminar_usuario(cusuario):
     try:
         connection = conexion()
         cursor = connection.cursor()
-        
+
         postgres_select_query = """DELETE FROM USUARIO
                                     WHERE CUSUARIO = '%s';"""
-                                    
+
         cursor.execute(postgres_select_query % cusuario)
         connection.commit()
         print("\nUsuario eliminado con exito")
@@ -307,24 +323,24 @@ def eliminar_anunciante(canuncio):
     try:
         connection = conexion()
         cursor = connection.cursor()
-        
+
         postgres_select_query = """DELETE FROM ANUNCIO
                                     WHERE CANUNCIO = '%s';"""
-                                    
+
         cursor.execute(postgres_select_query % canuncio)
         connection.commit()
         print("\nUsuario eliminado con exito")
     except (Exception, psycopg2.Error) as error:
         print("\nError while fetching data from PostgreSQL", error)
-        
+
 def eliminar_pelicula(cpelicula):
     try:
         connection = conexion()
         cursor = connection.cursor()
-        
+
         postgres_select_query = """DELETE FROM PELICULA
                                     WHERE CPELICULA = '%s';"""
-                                    
+
         cursor.execute(postgres_select_query % cpelicula)
         connection.commit()
         print("\nUsuario eliminado con exito")
@@ -342,11 +358,11 @@ def eliminar():
     if opcion1 == '1':
         cusuario = input("\nIngrese el codigo del usuario para eliminar: ")
         eliminar_usuario(cusuario)
-        
+
     elif opcion1 == '2':
         canuncio = input("\nIngrese el codigo del anuncio para eliminar: ")
         eliminar_anunciante(canuncio)
-    
+
     elif opcion1 == '3':
         cpelicula = input("\nIngrese el codigo de la pelicula para eliminar: ")
         eliminar_pelicula(cpelicula)
@@ -355,8 +371,8 @@ def eliminar():
     else:
         print("\nOpcion invalida")
 
-    
-    
+
+
 def alterar_registros():
     opcion1 = ''
     while opcion1 != '4':
@@ -376,9 +392,9 @@ def alterar_registros():
             print("\nVolviendo...")
         else:
             print("\nOpcion invalida")
-        
-        
-    
+
+
+
 def mainloop():
     opcion = ''
     fecha1 = ''
@@ -392,8 +408,9 @@ def mainloop():
         print("5. Cantidad de cuentas creadas en los ultimos 6 meses")
         print("6. Top 10 actores más vistos")
         print("7. Top 10 directores más vistos")
-        print("8. Alterar registros")
-        print("9. Salir")
+        print("8. Top 10 busquedas")
+        print(". Alterar registros")
+        print(". Salir")
         opcion = input("\nIngrese una opcion: ")
         
         if opcion == '1':
@@ -417,10 +434,12 @@ def mainloop():
         elif opcion == '7':
             top10_directores()
         elif opcion == '8':
+            top10_busqueda()
+        elif opcion == '':
             alterar_registros()
-        elif opcion == '9':
+        elif opcion == '':
             print("\nSaliendo...")
-            
+
         else: print('Opcion invalida')
-    
-    
+
+
