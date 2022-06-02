@@ -160,10 +160,8 @@ def top10_busqueda():
     try:
         connection = conexion()
         cursor = connection.cursor()
-        postgres_select_query = """ SELECT DATO, COUNT(DATO) AS VECES_BUSCADO
-                                    FROM BUSQUEDA
-                                    GROUP BY DATO
-                                    LIMIT 10"""
+        postgres_select_query = """ SELECT *
+                                    FROM TOP10BUSQUEDA"""
                                     
         cursor.execute(postgres_select_query)
         records = cursor.fetchall()
