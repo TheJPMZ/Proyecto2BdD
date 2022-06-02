@@ -1,9 +1,6 @@
-from datetime import datetime
 from tkinter import messagebox
-import time
 
 from hash import hash
-from operator import pos
 import psycopg2
 
 def conexion():
