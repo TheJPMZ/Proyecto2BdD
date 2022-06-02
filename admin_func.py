@@ -1,3 +1,4 @@
+from email.mime import message
 from pass_manager import conexion
 import psycopg2
 from registro import Registro
@@ -201,6 +202,23 @@ def top20_noterminadas(fecha1,fecha2):
         print("----------------------------------------------------")
         for row in records:
             print("\PELICULA: " + row[0], " | Cantidad: " + str(row[1]))
+    except (Exception, psycopg2.Error) as error:
+        print("\nError while fetching data from PostgreSQL", error)
+
+def top5_mes_horas(mes):
+    try:
+        connection = conexion()
+        cursor = connection.cursor()
+        postgres_select_query = """ SELECT *
+                                    FROM top5_mes_horas(%s,%s)
+                                    ORDER BY HOURS ASC, CANTI DESC"""
+
+        cursor.execute(postgres_select_query % (mes))
+        records = cursor.fetchall()
+        print("\nTop 5 peliculas por cada hora para el mes seleccionado: ")
+        print("----------------------------------------------------")
+        for row in records:
+            print("\Hora: " + row[0], " | PELICULA: " + str(row[1]) + " | Cantidad: " + str(row[2]))
     except (Exception, psycopg2.Error) as error:
         print("\nError while fetching data from PostgreSQL", error)
 
@@ -486,8 +504,11 @@ def mainloop():
             name = input("Ingrese el nombre de la persona: ")
             Registro(username,email,password, name, 'Admin')
         elif opcion == '12':
-            alterar_registros()
+            mes = input("Ingrese el mes (1-12): ")
+            top5_mes_horas(mes)
         elif opcion == '13':
+            alterar_registros()
+        elif opcion == '14':
             print("\nSaliendo...")
 
         else: print('Opcion invalida')
