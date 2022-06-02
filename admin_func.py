@@ -1,5 +1,6 @@
 from pass_manager import conexion
 import psycopg2
+from registro import Registro
 
 
 
@@ -168,6 +169,38 @@ def top10_busqueda():
         print("----------------------------------------------------")
         for row in records:
             print("\nBusqueda: " + row[0], " | Cantidad: " + str(row[1]))
+    except (Exception, psycopg2.Error) as error:
+        print("\nError while fetching data from PostgreSQL", error)
+
+def top5_admins(fecha1,fecha2):
+    try:
+        connection = conexion()
+        cursor = connection.cursor()
+        postgres_select_query = """ SELECT *
+                                    FROM TOP5ADMINS(%s,%s)"""
+
+        cursor.execute(postgres_select_query % (fecha1, fecha2))
+        records = cursor.fetchall()
+        print("\nTop 5 ADMINS CON MAS MODIFICACIONES: ")
+        print("----------------------------------------------------")
+        for row in records:
+            print("\aAdmin: " + row[0], " | Cantidad: " + str(row[1]))
+    except (Exception, psycopg2.Error) as error:
+        print("\nError while fetching data from PostgreSQL", error)
+        
+def top20_noterminadas(fecha1,fecha2):
+    try:
+        connection = conexion()
+        cursor = connection.cursor()
+        postgres_select_query = """ SELECT *
+                                    FROM PELICULAS_NOVISTAS(%s,%s)"""
+
+        cursor.execute(postgres_select_query % (fecha1, fecha2))
+        records = cursor.fetchall()
+        print("\nTop 20 PELICULAS NO TERMINADAS: ")
+        print("----------------------------------------------------")
+        for row in records:
+            print("\PELICULA: " + row[0], " | Cantidad: " + str(row[1]))
     except (Exception, psycopg2.Error) as error:
         print("\nError while fetching data from PostgreSQL", error)
 
@@ -409,8 +442,11 @@ def mainloop():
         print("6. Top 10 actores más vistos")
         print("7. Top 10 directores más vistos")
         print("8. Top 10 busquedas")
-        print(". Alterar registros")
-        print(". Salir")
+        print("9. Top 5 admins con mas cambios")
+        print("10. Top 20 peliculas no terminadas de ver")
+        print("11. Crear nuevo administrador")
+        print("12. Alterar registros")
+        print("13. Salir")
         opcion = input("\nIngrese una opcion: ")
         
         if opcion == '1':
@@ -435,9 +471,23 @@ def mainloop():
             top10_directores()
         elif opcion == '8':
             top10_busqueda()
-        elif opcion == '':
+        elif opcion == '9':
+            fecha1 = input("Ingrese la fecha inicial (YYYY-MM-DD): ")
+            fecha2 = input("Ingrese la fecha final (YYYY-MM-DD): ")
+            top5_admins(fecha1,fecha2)
+        elif opcion == '10':
+            fecha1 = input("Ingrese la fecha inicial (YYYY-MM-DD): ")
+            fecha2 = input("Ingrese la fecha final (YYYY-MM-DD): ")
+            top20_noterminadas(fecha1,fecha2)
+        elif opcion == '11':
+            username = input("Ingrese el nombre de usuario: ")
+            email = input("Ingrese el email: ")
+            password = input("Ingrese la contraseña: ")
+            name = input("Ingrese el nombre de la persona: ")
+            Registro(username,email,password, name, 'Admin')
+        elif opcion == '12':
             alterar_registros()
-        elif opcion == '':
+        elif opcion == '13':
             print("\nSaliendo...")
 
         else: print('Opcion invalida')
