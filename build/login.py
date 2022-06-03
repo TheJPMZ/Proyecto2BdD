@@ -193,6 +193,7 @@ def run_window(window,canvas):
                                             WHERE username = '%s'"""
                 cursor.execute(postgres_select_query % e1)
                 records = cursor.fetchall()
+                print(records)
                 tipo_cuenta = records[0][4]
                 profiles = 0
                 messagebox.showwarning("alert", tipo_cuenta)

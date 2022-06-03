@@ -1,7 +1,11 @@
 from email.mime import message
+
+import pass_manager
+import simulacion
 from pass_manager import conexion
 import psycopg2
 from registro import Registro
+from registro import Profiler
 
 
 
@@ -178,7 +182,7 @@ def top5_admins(fecha1,fecha2):
         connection = conexion()
         cursor = connection.cursor()
         postgres_select_query = """ SELECT *
-                                    FROM TOP5ADMINS(%s,%s)"""
+                                    FROM TOP5ADMINS('%s','%s')"""
 
         cursor.execute(postgres_select_query % (fecha1, fecha2))
         records = cursor.fetchall()
@@ -194,7 +198,7 @@ def top20_noterminadas(fecha1,fecha2):
         connection = conexion()
         cursor = connection.cursor()
         postgres_select_query = """ SELECT *
-                                    FROM PELICULAS_NOVISTAS(%s,%s)"""
+                                    FROM PELICULAS_NOVISTAS('%s','%s')"""
 
         cursor.execute(postgres_select_query % (fecha1, fecha2))
         records = cursor.fetchall()
@@ -210,15 +214,15 @@ def top5_mes_horas(mes):
         connection = conexion()
         cursor = connection.cursor()
         postgres_select_query = """ SELECT *
-                                    FROM top5_mes_horas(%s,%s)
+                                    FROM top5_mes_horas(%s)
                                     ORDER BY HOURS ASC, CANTI DESC"""
 
-        cursor.execute(postgres_select_query % (mes))
+        cursor.execute(postgres_select_query % (str(mes)))
         records = cursor.fetchall()
         print("\nTop 5 peliculas por cada hora para el mes seleccionado: ")
         print("----------------------------------------------------")
         for row in records:
-            print("\Hora: " + row[0], " | PELICULA: " + str(row[1]) + " | Cantidad: " + str(row[2]))
+            print("\Hora: " + str(row[0]), " | PELICULA: " + str(row[1]) + " | Cantidad: " + str(row[2]))
     except (Exception, psycopg2.Error) as error:
         print("\nError while fetching data from PostgreSQL", error)
 
@@ -450,7 +454,7 @@ def mainloop():
     opcion = ''
     fecha1 = ''
     fecha2 = ''
-    while opcion != '9':
+    while opcion != '15':
         print("\nMENU:")
         print("1. Top 10 generos vistos")
         print("2. Minutos consumidos")
@@ -463,8 +467,10 @@ def mainloop():
         print("9. Top 5 admins con mas cambios")
         print("10. Top 20 peliculas no terminadas de ver")
         print("11. Crear nuevo administrador")
-        print("12. Alterar registros")
-        print("13. Salir")
+        print("12. Top5 mes horas")
+        print("13. Alterar registros")
+        print("14. Simular")
+        print("15. Salir")
         opcion = input("\nIngrese una opcion: ")
         
         if opcion == '1':
@@ -490,12 +496,12 @@ def mainloop():
         elif opcion == '8':
             top10_busqueda()
         elif opcion == '9':
-            fecha1 = input("Ingrese la fecha inicial (YYYY-MM-DD): ")
-            fecha2 = input("Ingrese la fecha final (YYYY-MM-DD): ")
+            fecha1 = input("Ingrese la fecha inicial (DD/MM/YYYY): ")
+            fecha2 = input("Ingrese la fecha final (DD/MM/YYYY: ")
             top5_admins(fecha1,fecha2)
         elif opcion == '10':
-            fecha1 = input("Ingrese la fecha inicial (YYYY-MM-DD): ")
-            fecha2 = input("Ingrese la fecha final (YYYY-MM-DD): ")
+            fecha1 = input("Ingrese la fecha inicial (DD/MM/YYYY: ")
+            fecha2 = input("Ingrese la fecha final (DD/MM/YYYY: ")
             top20_noterminadas(fecha1,fecha2)
         elif opcion == '11':
             username = input("Ingrese el nombre de usuario: ")
@@ -503,14 +509,26 @@ def mainloop():
             password = input("Ingrese la contraseña: ")
             name = input("Ingrese el nombre de la persona: ")
             Registro(username,email,password, name, 'Admin')
+
+            connection = pass_manager.conexion()
+            cursor = connection.cursor()
+            codigo = """ SELECT CUsuario FROM usuario """
+            cursor.execute(codigo)
+            res = cursor.fetchall()[-1]
+
+            Profiler('admin','99',res[0])
         elif opcion == '12':
             mes = input("Ingrese el mes (1-12): ")
             top5_mes_horas(mes)
         elif opcion == '13':
             alterar_registros()
         elif opcion == '14':
+            simulacion.simulation_menu()
+        elif opcion == '15':
             print("\nSaliendo...")
 
         else: print('Opcion invalida')
+
+
 
 

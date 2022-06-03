@@ -1,11 +1,3 @@
-CREATE TABLE HISTORY_MOD (
-	 	ID         	SERIAL,
-        TSTAMP   	TIMESTAMP	DEFAULT now(),
-        SCHEMANAME 	TEXT,
-        TABNAME    	TEXT,
-        OPERATION	TEXT,
-		WHO			TEXT	DEFAULT current_user
-);
 -- Se uso de base este tutorial: cybertec-postgresql.com/en/tracking-changes-in-postgresql/
 
 

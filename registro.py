@@ -12,18 +12,16 @@ def Registro(username,email,password, name, account):
         connection = pass_manager.conexion()
         cursor = connection.cursor()
         if pass_manager.check_user(username) == False:
-            codigo = """ SELECT CUsuario FROM usuario ORDER BY CUsuario DESC LIMIT 1 """
+            codigo = """ SELECT CUsuario FROM usuario """
             cursor.execute(codigo)
-            res = cursor.fetchone()[0]
-            
+            res = cursor.fetchall()[-1]
+
             #Separar por numero
-            res = res.split('U')[1]
+            res = res[0].split('U')[1]
             
             res = ''.join('U' + str(int(res)+1))
 
-            print(password)
             password = hash.hash(password)
-            print(password)
 
             postgres_select_query = """ INSERT INTO usuario(cusuario, username, nombre, password, email, cuenta, date) VALUES ('%s','%s','%s','%s','%s','%s',Now())"""
             cursor.execute(postgres_select_query % (res,username,name,password,email,account))
@@ -43,19 +41,24 @@ def Registro(username,email,password, name, account):
         print("Error while fetching data from PostgreSQL", error)
 
 
-def Profiler(username, age):
+def Profiler(username, age, meme = None):
     try:
+
+        if not meme:
+            codig_usuario = variables.global_user
+        else:
+            codig_usuario = meme
         connection = pass_manager.conexion()
         cursor = connection.cursor()
 
-        codigo = """ SELECT CPerfil FROM perfil ORDER BY CPerfil DESC LIMIT 1 """
+        codigo = """ SELECT CPerfil FROM perfil"""
         cursor.execute(codigo)
-        res = cursor.fetchone()[0]
+        res = cursor.fetchall()[-1]
 
-        newres = res[0:3] + str(int(res[3:])+1)
+        newres = res[0][0:3] + str(int(res[0][3:])+1)
 
         postgres_select_query = """ INSERT INTO perfil(cperfil, cusuario, lognumber, profilename, edad) VALUES ('%s','%s','%s','%s','%s')"""
-        cursor.execute(postgres_select_query % (newres, variables.global_user, 1, username, age))
+        cursor.execute(postgres_select_query % (newres, codig_usuario, 1, username, age))
 
 
 
